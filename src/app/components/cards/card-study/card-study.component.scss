@@ -1,0 +1,205 @@
+@import '../../../../assets/variables';
+
+.card {
+    position: relative;
+    width: 80%;
+    // height: 400px;
+    margin: 40px auto 0;
+    perspective: 1000px;
+
+    &__flip-container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 1s .1s;
+        // border: 1px solid #9e9e9e;
+        box-shadow: 0 0px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        font-size: 14px;
+        text-align: center;
+
+        -ms-transform-style: none;
+        -ms-transform: none;
+        
+        &.flipped {
+            transform: rotateY( 180deg );
+            -ms-transform: rotateX(180deg);
+            .card__front { opacity: 0; }
+            .card__back { opacity: 1; }
+        }
+    }
+
+    &__back, &__front {
+        padding-top: 20px;
+    }
+
+    &__back {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        backface-visibility: hidden;
+        transition: opacity .5s .5s;
+    }
+
+    &__front {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        background-color: #fff;
+        transition: opacity .5s;
+    }
+
+    &__back {
+        background-color: #fff;
+        transform: rotateY( 180deg );
+        -ms-transform: rotateX(180deg);
+    }
+}
+
+.card__front-text {
+    margin: 0 0 30px;
+}
+.card__back-text {
+    margin: 0 0 30px;
+}
+
+.card-flip-btn {
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    padding: 6px 16px 6px 28px;
+    font-size: 12px;
+    color: $black;
+    border: 1px solid #a2a2a2;
+    border-radius: 20px;
+    text-decoration: none;
+    outline: none;
+    transition: all .2s, opacity .3s;
+    background-color: transparent;
+    cursor: pointer;
+    &:hover {
+        border-color: $red;
+        color: #fff;
+        background-color: $red;
+    }
+    &:before {
+        position: absolute;
+        left: 6px; top: 50%;
+        transform: translateY(-50%);
+        font-family: 'Material Icons';
+        font-size: 16px;
+        content: 'rotate_90_degrees_ccw'
+    }
+    &:after {
+        position: absolute;
+        top: -25%;
+        left: -2px;
+        padding: 2px;
+        z-index: -1;
+        pointer-events: none;
+        width: 100%;
+        height: 150%;
+        border-radius: 50%;
+        content: '';
+        transition: transform 0.2s, opacity 0.2s, background-color .1s;
+    }
+
+    &:active {
+        background-color: lighten($red, 10%);
+        &:after {
+            background-color: $red;
+            transform: scale(1.8);
+            opacity: 0;
+        }
+    }
+}
+
+/* -------------------------- CARD RATES ------------------------ */
+/* -------------------------------------------------------------- */
+
+.card-rate {
+    text-align: center;
+}
+
+.card-rate-desc {
+    display: inline-block;
+    position: relative;
+    margin: 0 0 10px;
+    padding-right: 20px;
+    font-size: 12px;
+    &:after {
+        position: absolute;
+        right: 0; top: 50%;
+        transform: translateY(-50%);
+        font-family: 'Material Icons';
+        font-size: 16px;
+        color: $red;
+        content: 'arrow_downward';
+    }
+}
+
+.card-rate-btns {
+    font-size: 0; // remove empty space for inline-blocks
+    margin-bottom: 20px;
+}
+
+.card-rate-btn {
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    margin: 0 2px;
+    font-size: 24px;
+    color: $black;
+    
+    border-radius: 20px;
+    outline: none;
+    text-decoration: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all .1s;
+    
+    font-family: 'Material Icons';
+    border: none;
+
+    &:after {
+        position: absolute;
+        top: -25%;
+        left: 0;
+        z-index: -1;
+        pointer-events: none;
+        width: 100%;
+        height: 150%;
+        border-radius: 50%;
+        content: '';
+        transition: transform 0.2s, opacity 0.2s, background-color .1s;
+    }
+    &:hover {
+        transform: scale(1.2);
+    }
+    &:active:after {
+        transform: scale(1.4);
+        opacity: 0;
+    }
+    &.bad {
+        &:active:after { background-color: $red; }
+        &:hover { color: $red; }
+    }
+    &.poor {
+        &:active:after { background-color: #2196f3; }
+        &:hover { color: #2196f3; }
+    }
+    &.ok {
+        &:active:after { background-color: #ffc107; }
+        &:hover { color: #ffc107; }
+    }
+    &.good {
+        &:active:after { background-color: #8bc34a; }
+        &:hover { color: #8bc34a; }
+    }
+    &.great {
+        &:active:after { background-color: #4caf50;}
+        &:hover { color: #4caf50; }
+    }
+}

@@ -1,0 +1,165 @@
+@import '../../../../assets/variables';
+
+.card-form {
+    width: 80%;
+    margin: 40px auto 0;
+    padding: 30px 0 20px;
+    border-radius: 5px;
+    box-shadow: 0 0px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.card-form-group {
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.card-text {
+    width: 100%;
+    margin-bottom: 26px;
+    padding: 4px;
+    border: 1px solid #c7c7c7;
+    border-radius: 5px;
+    // box-shadow: 0 0px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    font-family: sans-serif;
+    outline: none;
+    resize: none;
+    transition: .2s;
+    &:focus {
+        // box-shadow: 0 0 5px 0px lighten($red, 20%);
+        box-shadow: none;
+        border-color: $red;
+        ~ .card-label {
+            top: -18px; left: 0;
+            font-size: 12px;
+            color: $red;
+            &:before { font-size: 14px; }
+        }
+    }
+    &.ng-valid {
+        ~ .card-label {
+            top: -18px; left: 0;
+            font-size: 12px;
+            color: $red;
+            &:before {
+                font-size: 16px;
+                font-weight: bold;
+                content: 'check';
+            }
+        }
+    }
+}
+
+.card-label {
+    position: absolute;
+    left: 10px; top: 10px;
+    padding-left: 20px;
+    font-size: 14px;
+    transition: all 0.125s cubic-bezier(0.2, 0, 0.03, 1);
+    &:before {
+        position: absolute;
+        left: 0; top: 50%;
+        transform: translateY(-50%);
+        font-family: 'Material Icons';
+        font-size: 16px;
+        content: 'edit';
+    }
+}
+
+.card-form-btn {
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    margin: 0 4px;
+    padding: 6px 16px 6px 24px;
+    font-size: 12px;
+    color: $black;
+    
+    border-radius: 20px;
+    outline: none;
+    text-decoration: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all .2s;
+    &:before {
+        position: absolute;
+        left: 6px; top: 50%;
+        transform: translateY(-50%);
+        font-family: 'Material Icons';
+        font-size: 14px;
+    }
+
+    &:after {
+        position: absolute;
+        top: -25%;
+        left: 0;
+        z-index: -1;
+        pointer-events: none;
+        width: 100%;
+        height: 150%;
+        border-radius: 50%;
+        content: '';
+        transition: transform 0.2s, opacity 0.2s, background-color .1s;
+    }
+
+    &.cancel {
+        border: 1px solid #ff9800;
+        color: #ff9800;
+        &:before { content: 'undo' }
+        &:hover {
+            background-color: #ff9800;
+            color: #fff;
+        }
+        &:active {
+            background-color: lighten(#ff9800, 15%);
+            border-color: lighten(#ff9800, 15%);
+            &:after {
+                background-color: #ff9800;
+                transform: scale(1.8);
+                opacity: 0;
+            }
+        }
+    }
+    &.save {
+        border: 1px solid #4caf50;
+        color: #4caf50;
+        &[disabled] {
+            border-color: #9e9e9e;
+            color: #9e9e9e;
+            cursor: default;
+        }
+        &:before { content: 'done'; }
+        &:not([disabled]):hover {
+            background-color: #4caf50;
+            color: #fff;
+        }
+        &:active {
+            background-color: lighten(#4caf50, 15%);
+            border-color: lighten(#4caf50, 15%);
+            &:after {
+                background-color: #4caf50;
+                transform: scale(1.8);
+                opacity: 0;
+            }
+        }
+    }
+    &.delete {
+        border: 1px solid $red;
+        color: $red;
+        &:before { content: 'delete' }
+        &:hover {
+            background-color: $red;
+            color: #fff;
+        }
+        &:active {
+            background-color: lighten($red, 15%);
+            border-color: lighten($red, 15%);
+            &:after {
+                background-color: $red;
+                transform: scale(1.8);
+                opacity: 0;
+            }
+        }
+    }
+}
