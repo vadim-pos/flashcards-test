@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { FlashcardsService } from '../../../services/flashcards.service';
@@ -9,14 +9,14 @@ import { Deck } from '../../../models/deck';
     template: `
         <ul class="decks-list">
             <li *ngFor="let deck of decks" routerLinkActive="active" class="decks-item">
-                <button class="item-edit-trigger" title="edit deck">edit</button>
+                <button (click)="showEditForm(editForm)" class="item-edit-trigger" title="edit deck">edit</button>
 
-                <a [routerLink]="['/deck', deck.id]" routerLinkActive="active" class="decks-item-link">{{deck.name}}</a>
+                <a (click)="hideEditForm()" [routerLink]="['/deck', deck.id]" routerLinkActive="active" class="decks-item-link">{{deck.name}}</a>
 
-                <form class="edit-form">
-                    <input [value]="deck.name" required type="text" class="edit-text"/>
+                <form #editForm (ngSubmit)="nameField.value === deck.name ? hideEditForm() : updateDeckName(deck.id, nameField.value)" class="edit-form">
+                    <input #nameField (keyup.escape)="hideEditForm()" [value]="deck.name" required type="text" class="edit-text"/>
                     <button class="edit-submit" type="submit">done</button>
-                    <button class="edit-remove">delete</button>
+                    <button class="edit-remove" type="button">delete</button>
                 </form>
             </li>
         </ul>
@@ -26,17 +26,33 @@ import { Deck } from '../../../models/deck';
 export class DecksListComponent implements OnInit {
     decks:Deck[];
     deckCreatedSubscription:Subscription;
-    
+    activeFormElement:HTMLElement;
 
-    constructor(private flashcardsService:FlashcardsService) { }
+    constructor(private flashcardsService:FlashcardsService, private renderer:Renderer2) { }
 
     ngOnInit() {
         this.decks = this.flashcardsService.getDecks();
 
         /* subscribe for new deck creation event */
-        this.deckCreatedSubscription = this.flashcardsService.deckCreated.subscribe(() => {
+        this.deckCreatedSubscription = this.flashcardsService.decksUpdated.subscribe(() => {
             this.decks = this.flashcardsService.getDecks();
         });
+    }
+
+    showEditForm(form:HTMLElement) {
+        this.activeFormElement = form;
+        this.renderer.addClass(form, 'active');
+        this.activeFormElement[0].focus(); // set focus on name input field
+    }
+
+    hideEditForm() {
+        if (this.activeFormElement) { this.renderer.removeClass(this.activeFormElement, 'active'); }
+    }
+
+    updateDeckName(deckId:number, deckName:string) {
+        if (!deckName.length) { this.hideEditForm(); }
+        this.flashcardsService.updateDeckName(deckId, deckName);
+        this.hideEditForm();
     }
 
     ngOnDestroy() {

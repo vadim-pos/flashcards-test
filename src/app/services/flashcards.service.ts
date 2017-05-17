@@ -7,7 +7,7 @@ import { Card } from '../models/card';
 @Injectable()
 export class FlashcardsService {
     decks:Deck[] = [];
-    deckCreated:Subject<void> = new Subject<void>();
+    decksUpdated:Subject<void> = new Subject<void>();
 
     constructor() {
         this.decks = JSON.parse(localStorage.getItem('flashcards')) || [
@@ -71,7 +71,13 @@ export class FlashcardsService {
             cards: []
         });
 
-        this.deckCreated.next();
+        this.decksUpdated.next();
+        this.saveFlashcards();
+    }
+
+    updateDeckName(deckId:number, deckName:string) {
+        this.getDeckById(deckId).name = deckName;
+        this.decksUpdated.next();
         this.saveFlashcards();
     }
 
