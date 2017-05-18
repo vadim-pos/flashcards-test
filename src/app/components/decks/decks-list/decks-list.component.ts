@@ -9,14 +9,14 @@ import { Deck } from '../../../models/deck';
     template: `
         <ul class="decks-list">
             <li *ngFor="let deck of decks" routerLinkActive="active" class="decks-item">
-                <button (click)="showEditForm(editForm)" class="item-edit-trigger" title="edit deck">edit</button>
+                <button (click)="showEditForm(editForm)" class="item-edit-trigger" title="edit deck"></button>
 
                 <a (click)="hideEditForm()" [routerLink]="['/deck', deck.id]" routerLinkActive="active" class="decks-item-link">{{deck.name}}</a>
 
                 <form #editForm (ngSubmit)="nameField.value === deck.name ? hideEditForm() : updateDeckName(deck.id, nameField.value)" class="edit-form">
                     <input #nameField (keyup.escape)="hideEditForm()" [value]="deck.name" required type="text" class="edit-text"/>
-                    <button class="edit-submit" type="submit">done</button>
-                    <button class="edit-remove" type="button">delete</button>
+                    <button class="edit-submit" type="submit" title="update name"></button>
+                    <button (click)="deleteDeck(deck.id)" class="edit-remove" type="button" title="delete deck"></button>
                 </form>
             </li>
         </ul>
@@ -53,6 +53,10 @@ export class DecksListComponent implements OnInit {
         if (!deckName.length) { this.hideEditForm(); }
         this.flashcardsService.updateDeckName(deckId, deckName);
         this.hideEditForm();
+    }
+
+    deleteDeck(deckId:number) {
+        this.flashcardsService.deleteDeck(deckId);
     }
 
     ngOnDestroy() {

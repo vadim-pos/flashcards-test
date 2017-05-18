@@ -81,6 +81,12 @@ export class FlashcardsService {
         this.saveFlashcards();
     }
 
+    deleteDeck(deckId:number) {
+        this.decks = this.decks.filter(deck => deck.id !== deckId);
+        this.decksUpdated.next();
+        this.saveFlashcards();
+    }
+
     addCard(deckId:number, newCard:Card) {
         this.getDeckById(deckId).cards.push(newCard);
         this.saveFlashcards();
