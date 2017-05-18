@@ -1,4 +1,5 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
 import { FlashcardsService } from '../../../services/flashcards.service';
@@ -28,7 +29,7 @@ export class DecksListComponent implements OnInit {
     deckCreatedSubscription:Subscription;
     activeFormElement:HTMLElement;
 
-    constructor(private flashcardsService:FlashcardsService, private renderer:Renderer2) { }
+    constructor(private flashcardsService:FlashcardsService, private renderer:Renderer2, private router:Router) {}
 
     ngOnInit() {
         this.decks = this.flashcardsService.getDecks();
@@ -57,6 +58,7 @@ export class DecksListComponent implements OnInit {
 
     deleteDeck(deckId:number) {
         this.flashcardsService.deleteDeck(deckId);
+        this.router.navigate(['/']);
     }
 
     ngOnDestroy() {

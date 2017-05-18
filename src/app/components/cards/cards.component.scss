@@ -1,5 +1,6 @@
 @import '../../../assets/variables';
 @import '../../../assets/mixins';
+@import '../../../assets/animations';
 
 .cards {
     height: 100%;
@@ -188,6 +189,7 @@
 
     &__item-desc {
         margin-bottom: 30px;
+        padding: 0 4px;
         font-size: 14px;
         color: $black;
     }
@@ -250,13 +252,4 @@
     &__item-study:before {
         content: 'school';
     }
-}
-
-
-/* ---------------------- ANIMATION KEYFRAMES -------------------- */
-/* --------------------------------------------------------------- */
-
-@keyframes scaleUp {
-    0% { transform: scale(0); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
 }

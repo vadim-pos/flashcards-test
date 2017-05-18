@@ -11,11 +11,13 @@ import { Card } from '../../../models/card';
             <div [class.flipped]="cardFlipped" class="card__flip-container">
 
                 <div class="card__front">
+                    <button (click)="navigateBack()" class="close-btn"></button>
                     <p class="card__front-text">{{card.front}}</p>
                     <button (click)="cardFlipped = true" class="card-flip-btn">Flip Card</button>
                 </div>
 
                 <div class="card__back">
+                    <button (click)="navigateBack()" class="close-btn"></button>
                     <p class="card__back-text">{{card.back}}</p>
                     <div class="card-rate">
                         <p class="card-rate-desc">Rate your result</p>
@@ -94,17 +96,21 @@ export class CardStudyComponent implements OnInit {
         this.flashcardsService.updateCard(this.deckId, this.card);
 
         if (this.singleCardMode) {
-            this.router.navigate(['../../'], {relativeTo: this.route}); // navigate back
+            this.navigateBack();
         } else {
             this.unstudiedCards.shift(); // remove studied card
 
             if (this.unstudiedCards.length) { // if there are unstudied cards - get new one
-                this.card = this.unstudiedCards[0];
                 this.cardFlipped = false;
+                setTimeout(() => this.card = this.unstudiedCards[0], 300); // wait untill card flipps back
             } else { // show 'no cards left' message
                 this.card = null;
             }
         }
+    }
+
+    navigateBack() {
+        this.router.navigate(['deck', this.deckId]);
     }
 
 }

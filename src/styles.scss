@@ -23,6 +23,14 @@ html, body {
     font-family: sans-serif;
 }
 
+body {
+    // background: linear-gradient(to right, #2b2533, #a9a9a8);
+    // background: linear-gradient(to right, #ce4f41, #582323);
+    // background: linear-gradient(to right, #929292, #fffaf4);
+    // background: linear-gradient(to right, #292929, #ffffff);
+    background: linear-gradient(to right, #a73737, #7a2828);
+}
+
 * { box-sizing: border-box; }
 
 .app-container {
@@ -40,4 +48,7 @@ html, body {
     width: 70%;
     height: 100%;
     float: right;
+    overflow-x: hidden;
+
+    background-color: #fff;
 }
