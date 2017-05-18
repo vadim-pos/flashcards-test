@@ -43,11 +43,11 @@ export class FlashcardsService {
         return this.decks.filter(deck => deck.id === deckId)[0];
     }
 
-    getDeckCards(deckId:number) {
+    getDeckCards(deckId:number):Card[] {
         return this.getDeckById(deckId).cards;
     }
 
-    getDeckCard(deckId:number, cardId:number) {
+    getDeckCard(deckId:number, cardId:number):Card {
         /* return card copy (using object spread) */
         return {...this.getDeckById(deckId).cards.filter(card => card.id === cardId)[0]};
     }

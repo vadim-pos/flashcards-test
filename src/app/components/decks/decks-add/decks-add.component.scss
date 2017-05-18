@@ -1,7 +1,7 @@
 @import '../../../../assets/variables';
 @import '../../../../assets/mixins';
 
-/* ---------------------- CREATE FROM TOGGLING -------------------- */
+/* ---------------------- CREATE FORM TOGGLING -------------------- */
 /* ---------------------------------------------------------------- */
 
 .form-toggle-wrap {
@@ -30,10 +30,9 @@
         font-size: 22px;
     }
 
-    &.close:before {
-        font-size: 20px;
-        content: 'clear';
-        color: $red;
+    &.close {
+        transform: rotate(45deg);
+        &:before { color: $red; }
     }
 
     &.close:after {

@@ -8,17 +8,19 @@ import { Card } from '../../../models/card';
     selector: 'app-card-study',
     template: `
         <div *ngIf="card" class="card">
+                <p *ngIf="!singleCardMode" class="title">
+                    Studying {{deckName}}. <span class.cards-count>{{unstudiedCards.length}} cards left.</span>
+                </p>
             <div [class.flipped]="cardFlipped" class="card__flip-container">
-
                 <div class="card__front">
                     <button (click)="navigateBack()" class="close-btn"></button>
-                    <p class="card__front-text">{{card.front}}</p>
+                    <p class="card__text">{{card.front}}</p>
                     <button (click)="cardFlipped = true" class="card-flip-btn">Flip Card</button>
                 </div>
 
                 <div class="card__back">
                     <button (click)="navigateBack()" class="close-btn"></button>
-                    <p class="card__back-text">{{card.back}}</p>
+                    <p class="card__text">{{card.back}}</p>
                     <div class="card-rate">
                         <p class="card-rate-desc">Rate your result</p>
 
@@ -55,6 +57,7 @@ import { Card } from '../../../models/card';
 })
 export class CardStudyComponent implements OnInit {
     deckId:number;
+    deckName:string;
     cardId:number;
     card:Card;
     unstudiedCards:Card[];
@@ -71,9 +74,8 @@ export class CardStudyComponent implements OnInit {
         this.route.params.subscribe((params: Params) => {
             /*  if studying a single card */
 
-            this.singleCardMode = true;
-
             if (params['cardId']) {
+                this.singleCardMode = true;
                 this.deckId = +params['deckId'];
                 this.cardId = +params['cardId'];
                 this.card = this.flashcardsService.getDeckCard(this.deckId, this.cardId);
@@ -83,6 +85,7 @@ export class CardStudyComponent implements OnInit {
             } else {
                 this.singleCardMode = false;
                 this.deckId = +params['deckId'];
+                this.deckName = this.flashcardsService.getDeckById(this.deckId).name;
                 /* get first unstudied cards */
                 this.unstudiedCards = this.flashcardsService.getUnstudiedDeckCards(this.deckId);
                 this.card = this.unstudiedCards[0];

@@ -150,6 +150,7 @@
         padding: 30px 0 30px;
         border-radius: 5px;
         box-shadow: 0 0px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        vertical-align: middle;
         text-align: center;
         transition: transform .3s;
         &:nth-child(1) { animation: scaleUp .1s ease; }
@@ -189,7 +190,7 @@
 
     &__item-desc {
         margin-bottom: 30px;
-        padding: 0 4px;
+        padding: 0 6px;
         font-size: 14px;
         color: $black;
     }
