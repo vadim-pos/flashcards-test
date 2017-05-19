@@ -8,36 +8,38 @@ import { Card } from '../../../models/card';
     selector: 'app-card-study',
     template: `
         <div *ngIf="card" class="card">
-                <p *ngIf="!singleCardMode" class="title">
-                    Studying {{deckName}}. <span class.cards-count>{{unstudiedCards.length}} cards left.</span>
-                </p>
-            <div [class.flipped]="cardFlipped" class="card__flip-container">
-                <div class="card__front">
+            <p *ngIf="!singleCardMode" class="study-desc">
+                Studying {{deckName}}. <span class="cards-count">{{unstudiedCards.length + ' card' + (unstudiedCards.length > 1 ? 's' : '')}} left</span>
+            </p>
+            
+            <div [class.flipped]="cardFlipped" class="flip-container">
+                <div class="card-front">
                     <button (click)="navigateBack()" class="close-btn"></button>
-                    <p class="card__text">{{card.front}}</p>
+                    <p class="card-text">{{card.front}}</p>
                     <button (click)="cardFlipped = true" class="card-flip-btn">Flip Card</button>
                 </div>
 
-                <div class="card__back">
+                <div class="card-back">
                     <button (click)="navigateBack()" class="close-btn"></button>
-                    <p class="card__text">{{card.back}}</p>
-                    <div class="card-rate">
-                        <p class="card-rate-desc">Rate your result</p>
+                    <p class="card-text">{{card.back}}</p>
 
-                        <div class="card-rate-btns">
-                            <button (click)="onStudyDone(1)" class="card-rate-btn bad" title="bad">
+                    <div class="rate">
+                        <p class="rate-desc">Rate your result</p>
+
+                        <div class="rate-btns">
+                            <button (click)="onStudyDone(1)" class="rate-btn bad" title="bad">
                                 sentiment_very_dissatisfied
                             </button>
-                            <button (click)="onStudyDone(2)" class="card-rate-btn poor" title="poorly">
+                            <button (click)="onStudyDone(2)" class="rate-btn poor" title="poorly">
                                 sentiment_dissatisfied
                             </button>
-                            <button (click)="onStudyDone(3)" class="card-rate-btn ok" title="okay">
+                            <button (click)="onStudyDone(3)" class="rate-btn ok" title="okay">
                                 sentiment_neutral
                             </button>
-                            <button (click)="onStudyDone(4)" class="card-rate-btn good" title="good">
+                            <button (click)="onStudyDone(4)" class="rate-btn good" title="good">
                                 sentiment_satisfied
                             </button>
-                            <button (click)="onStudyDone(5)" class="card-rate-btn great" title="great">
+                            <button (click)="onStudyDone(5)" class="rate-btn great" title="great">
                                 sentiment_very_satisfied
                             </button>
                         </div>
@@ -99,7 +101,7 @@ export class CardStudyComponent implements OnInit {
         this.flashcardsService.updateCard(this.deckId, this.card);
 
         if (this.singleCardMode) {
-            this.navigateBack();
+            setTimeout(() => this.navigateBack(), 200); // add a little delay before navigating back
         } else {
             this.unstudiedCards.shift(); // remove studied card
 

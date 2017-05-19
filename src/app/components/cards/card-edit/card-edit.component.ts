@@ -8,18 +8,18 @@ import { Card } from '../../../models/card';
     selector: 'app-card-edit',
     template: `
         <form #form="ngForm" (ngSubmit)="onSubmit()" class="card-form">
-            <div class="card-form-group">
-                <textarea [(ngModel)]="card.front" class="card-text" name="front" cols="30" rows="8" required></textarea>
-                <label *ngIf="!editingMode" class="card-label">Front side</label>
+            <div class="form-group">
+                <textarea [(ngModel)]="card.front" class="text-field" id="front" name="front" cols="30" rows="8" required></textarea>
+                <label *ngIf="!editingMode" class="text-field-label" for="front">Front side</label>
             </div>
-            <div class="card-form-group">
-                <textarea [(ngModel)]="card.back" class="card-text" name="back" cols="30" rows="8" required></textarea>
-                <label *ngIf="!editingMode" class="card-label">Back side</label>
+            <div class="form-group">
+                <textarea [(ngModel)]="card.back" class="text-field" id="back" name="back" cols="30" rows="8" required></textarea>
+                <label *ngIf="!editingMode" class="text-field-label" for="back">Back side</label>
             </div>
-            <div class="card-form-group">
-                <button class="card-form-btn cancel" (click)="onCancel()" type="button">Cancel</button>
-                <button class="card-form-btn save" [disabled]="!form.valid" type="submit">Save</button>
-                <button class="card-form-btn delete" *ngIf="editingMode" (click)="onDelete()" type="button">Delete</button>
+            <div class="form-group">
+                <button class="form-btn cancel" (click)="navigateBack()" type="button">Cancel</button>
+                <button class="form-btn save" [disabled]="!form.valid" type="submit">Save</button>
+                <button class="form-btn delete" *ngIf="editingMode" (click)="onDelete()" type="button">Delete</button>
             </div>
         </form>
     `,
@@ -64,23 +64,21 @@ export class CardEditComponent implements OnInit {
         if (this.editingMode) {
             /* update existing card */
             this.flashcardsService.updateCard(this.deckId, this.card);
-            this.router.navigate(['../../'], {relativeTo: this.route}); // back to deck/:deckId route
+            this.navigateBack();
         } else {
             /* add new card */
             this.flashcardsService.addCard(this.deckId, this.card);
-            this.router.navigate(['../'], {relativeTo: this.route}); // back to deck/:deckId route
+            this.navigateBack();
         }
-    }
-
-    onCancel() {
-        this.editingMode 
-            ? this.router.navigate(['../../'], {relativeTo: this.route})
-            : this.router.navigate(['../'], {relativeTo: this.route});
     }
 
     onDelete() {
         this.flashcardsService.deleteCard(this.deckId, this.cardId);
-        this.router.navigate(['../../'], {relativeTo: this.route}); // back to deck/:deckId route
+        this.navigateBack();
+    }
+
+    navigateBack() {
+        this.router.navigate(['deck', this.deckId]); // back to deck/:deckId route
     }
 
 }

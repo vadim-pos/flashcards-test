@@ -1,5 +1,6 @@
 @import 'assets/mixins';
 @import 'assets/variables';
+@import 'assets/fonts';
 
 /* ----------- Fonts ----------- */
 
@@ -23,32 +24,14 @@ html, body {
     font-family: sans-serif;
 }
 
+html { font-size: $baseFontSize; }
+
 body {
     // background: linear-gradient(to right, #2b2533, #a9a9a8);
-    // background: linear-gradient(to right, #ce4f41, #582323);
+    background: linear-gradient(to right, #ce4f41, #582323);
     // background: linear-gradient(to right, #929292, #fffaf4);
     // background: linear-gradient(to right, #292929, #ffffff);
-    background: linear-gradient(to right, #a73737, #7a2828);
+    // background: linear-gradient(to right, #a73737, #7a2828);
 }
 
 * { box-sizing: border-box; }
-
-.app-container {
-    width: 600px;
-    height: 100%;
-    max-height: 600px;
-    margin: 0 auto;
-    border: 1px solid #ccc;
-}
-
-
-/* ----------- Main (router-outlet) ----------- */
-.main {
-    position: relative;
-    width: 70%;
-    height: 100%;
-    float: right;
-    overflow-x: hidden;
-
-    background-color: #fff;
-}
