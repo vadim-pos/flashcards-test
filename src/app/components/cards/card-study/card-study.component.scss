@@ -11,7 +11,7 @@
     font-family: $lato-medium;
     color: #4c4c4c;
     text-align: center;
-    animation: slideIn .3s ease;
+    animation: slideIn .4s ease;
 }
 
 .cards-count {
@@ -28,7 +28,7 @@
     box-shadow: 0 0px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     font-size: 14px;
     text-align: center;
-    animation: slideIn .5s ease;
+    animation: slideIn .6s ease;
 
     -ms-transform-style: none;
     -ms-transform: none;
@@ -53,7 +53,7 @@
     height: 100%;
     opacity: 0;
     backface-visibility: hidden;
-    transition: opacity .5s .5s;
+    transition: opacity .4s .5s;
     background-color: #fff;
     transform: rotateY( 180deg );
     -ms-transform: rotateX(180deg);

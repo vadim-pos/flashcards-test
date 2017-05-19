@@ -14,6 +14,7 @@ import { Card } from '../../models/card';
                 <span *ngIf="cards.length" class="cards-count">
                     {{cards.length + ' card' + (cards.length > 1 ? 's' : '')}}
                 </span>
+                <span class="deck-name">{{deckName}}</span>
             </div>
 
             <p *ngIf="!cards.length" class="intro">
@@ -33,6 +34,7 @@ import { Card } from '../../models/card';
 })
 export class CardsComponent implements OnInit {
     deckId:number = null;
+    deckName:string;
     cards:Card[];
 
     constructor(private route:ActivatedRoute, private flashcardsService:FlashcardsService, private router:Router) { }
@@ -41,7 +43,9 @@ export class CardsComponent implements OnInit {
         this.route.params.subscribe((params: Params) => {
             if (params['deckId']) {
                 this.deckId = +params['deckId'];
-                this.cards = this.flashcardsService.getDeckCards(this.deckId);
+                const deck = this.flashcardsService.getDeckById(this.deckId);
+                this.deckName = deck.name;
+                this.cards = deck.cards;
             } else {
                 this.cards = [];
             }

@@ -4,25 +4,43 @@
 
 .cards {
     height: 100%;
-    overflow-y: auto;
+    // overflow-y: auto;
 }
 
 /* ------------------------- CONTROLS ----------------------- */
 /* ---------------------------------------------------------- */
 
 .controls {
-    @include clearfix();
+    // @include clearfix();
+    height: 50px;
     position: relative;
-    padding: 10px 3% 10px;
-    border-bottom: 1px solid #efefef;
+    padding: 9px 3% 10px;
+    // border-bottom: 1px solid #efefef;
+
+    background-color: $red;
+}
+
+.deck-name {
+    float: right;
+    max-width: 120px;
+    margin-right: 40px;
+    padding-top: 7px;
+    font-family: $lato;
+    font-size: 14px;
+    color: #fff;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .cards-count {
     float: right;
-    padding-top: 9px;
-    font-family: $lato-heavy;
-    font-size: 12px;
-    color: $red;
+    padding-top: 7px;
+    font-family: $lato;
+    font-size: 14px;
+    // color: $red;
+    
+    color: #fff;
 }
 
 .add-card-btn {
@@ -30,14 +48,17 @@
     position: relative;
     float: left;
     width: 26px; height: 26px;
-    margin-top: 2px;
+    margin-top: 3px;
     font-family: 'Material Icons';
-    color: $red;
+    // color: $red;
     background-color: transparent;
-    border: 2px solid $red;
+    // border: 2px solid $red;
     border-radius: 50%;
     z-index: 1;
     transition: all 0.2s;
+
+    color: #fff;
+    border: 2px solid #fff;
 
     &:before {
         content: 'add';
@@ -58,26 +79,29 @@
         height: 100%;
         border-radius: 50%;
         content: '';
-        transition: transform 0.2s, opacity 0.3s, background-color .1s;
+        transition: transform 0.2s, opacity 0.3s, background-color .2s;
     }
 
     &:active {
         color: $red;
         &:after {
-            background-color: $red;
+            // background-color: $red;
+            background-color: #fff;
             transform: scale(1.8);
             opacity: 0;
         }
     }
 
     &:hover {
-        color: #fff;
-        background-color: $red;
+        // color: #fff;
+        color: $red;
+        // background-color: $red;
+        background-color: #fff;
     }
 }
 
 .study-deck-btn {
-    float: left;
+    // float: left;
     position: relative;
     display: inline-block;
     margin-left: 14px;
@@ -85,12 +109,14 @@
     font-family: $lato-heavy;
     font-size: 12px;
     // font-weight: bold;
-    color: $red;
+    // color: $red;
+    color: #fff;
     text-decoration: none;
     overflow: hidden;
     transition: all .2s ease;
 
-    border: 1px solid $red;
+    // border: 1px solid $red;
+    border: 2px solid #fff;
     border-radius: 20px;
 
     &:before, &:after {
@@ -100,7 +126,8 @@
         left: 0; top: 50%;
         transform: translateY(-50%);
         padding: 6px;
-        color: $red;
+        // color: $red;
+        color: #fff;
         transition: all .2s ease;
     }
 
@@ -113,16 +140,20 @@
     }
 
     &:hover {
-        background-color: $red;
-        color: #fff;
-        &:before, &:after { color: #fff; }
+        // background-color: $red;
+        background-color: #fff;
+        // color: #fff;
+        color: $red;
+        &:before, &:after { /* color: #fff; */ color: $red; }
         &:before { transform: translateY(-150%); }
         &:after { transform: translateY(-50%); }
     }
 
     &:active {
-        border-color: lighten($red, 10%);
-        background-color: lighten($red, 10%);
+        // border-color: lighten($red, 10%);
+        // background-color: lighten($red, 10%);
+        border-color: darken(#fff, 15%);
+        background-color: darken(#fff, 15%);
     }
 }
 
@@ -139,9 +170,11 @@
 /* ------------------------------------------------------ */
 
 .cards-list {
+    height: calc(100% - 60px);
     margin: 0;
     padding: 20px 0 0 0;
     list-style: none;
+    overflow-y: auto;
 }
 
 .cards-item {
