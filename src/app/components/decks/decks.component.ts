@@ -3,10 +3,8 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'app-decks',
     template: `
-        <aside class="decks">
-            <app-decks-add></app-decks-add>
-            <app-decks-list></app-decks-list>
-        </aside>
+        <app-decks-add></app-decks-add>
+        <app-decks-list></app-decks-list>
     `,
     styleUrls: ['decks.component.scss']
 })

@@ -45,7 +45,7 @@ $saveColor: #4caf50;
         }
     }
     &.ng-valid {
-        ~ .card-label {
+        ~ .text-field-label {
             top: -19px; left: 0;
             font-size: 12px;
             color: $red;

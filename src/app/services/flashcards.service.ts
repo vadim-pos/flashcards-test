@@ -10,24 +10,7 @@ export class FlashcardsService {
     decksUpdated:Subject<void> = new Subject<void>();
 
     constructor() {
-        this.decks = JSON.parse(localStorage.getItem('flashcards')) || [
-            {
-                name: 'First Deck',
-                id: 11111,
-                cards: [
-                    {front: 'Deck1 Card1 Front', back: 'Deck1 Card1 Back', id: 1 },
-                    {front: 'Deck1 Card2 Front', back: 'Deck1 Card2 Back', id: 2 }
-                ]
-            },
-            {
-                name: 'Second Deck',
-                id: 22222,
-                cards: [
-                    {front: 'Deck2 Card1 Front', back: 'Deck2 Card1 Back', id: 3 },
-                    {front: 'Deck2 Card2 Front', back: 'Deck2 Card2 Back', id: 4 }
-                ]
-            }
-        ];
+        this.decks = JSON.parse(localStorage.getItem('flashcards')) || exampleDecks;
     }
 
     saveFlashcards() {
@@ -104,3 +87,25 @@ export class FlashcardsService {
         this.saveFlashcards();
     }
 }
+
+/* decks examples, setting as default */
+const exampleDecks:Deck[] = [
+    {
+        name: 'Chinease example',
+        id: 1052414683911,
+        cards: [
+            {front: 'Good afternoon', back: '下午好 - Xiàwǔ hǎo', id: 136032 },
+            {front: 'Good evening', back: '晚上好 - Wǎnshàng hǎo', id: 102992 },
+            {front: 'Hello', back: '你好 - Nǐ hǎo', id: 111192 },
+        ]
+    },
+    {
+        name: 'Belarusian History',
+        id: 124567890123,
+        cards: [
+            {front: 'Foundation of Mogilev', back: '1267 - the first mention in the annals. Foundation of Mogilev Castle.', id: 100012 },
+            {front: 'Mogilev defense in WWII dates', back: '17 days. From July 4 to July 21 (1941).', id: 122212 },
+            {front: 'Mogilev Liberation day in WWII', back: 'June 28 1944', id: 1909012 },
+        ]
+    }
+];
