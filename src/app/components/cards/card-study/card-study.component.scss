@@ -1,4 +1,6 @@
 @import '../../../../assets/variables';
+@import '../../../../assets/mixins';
+@import '../../../../assets/animations';
 
 .card {
     position: relative;
@@ -14,10 +16,7 @@
     animation: slideIn .4s ease;
 }
 
-.cards-count {
-    color: $red;
-    // font-weight: bold;
-}
+.cards-count { color: $red; }
 
 .flip-container {
     width: 100%;
@@ -266,5 +265,82 @@
         color: #fff;
         border-color: $red;
         background-color: $red;
+    }
+}
+
+/* ------------------------- STUDY DONE BLOCK ----------------------- */
+/* ------------------------------------------------------------------ */
+
+.study-done {
+    position: relative;
+    padding-top: 70px;
+    text-align: center;
+
+    & > .study-done-message { animation: slideIn .4s ease; }
+    & > .study-done-link { animation: slideIn .6s ease; }
+}
+
+.study-done-message {
+    margin-bottom: 30px;
+    padding: 0 20px;
+    font-family: $lato-medium;
+    font-size: rem(14px);
+
+    & strong {
+        display: block;
+        padding-top: 10px;
+        font-weight: normal;
+        color: $red;
+    }
+}
+
+.study-done-link {
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    margin: 0 4px;
+    padding: 6px 20px 6px 24px;
+    font-family: $lato-medium;
+    font-size: rem(14px);    
+    border: 1px solid #8bc34a;
+    color: #8bc34a;
+    border-radius: 20px;
+    outline: none;
+    text-decoration: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all .2s;
+    &:before {
+        position: absolute;
+        left: 6px; top: 50%;
+        transform: translateY(-50%);
+        font-family: 'Material Icons';
+        font-size: 14px;
+        content: 'check';
+    }
+    &:after {
+        position: absolute;
+        top: -25%;
+        left: 0;
+        z-index: -1;
+        pointer-events: none;
+        width: 100%;
+        height: 150%;
+        border-radius: 50%;
+        content: '';
+        transition: transform 0.2s, opacity 0.2s, background-color .1s;
+    }
+    &:hover {
+        background-color: #4caf50;
+        color: #fff;
+    }
+    &:active {
+        background-color: lighten(#4caf50, 15%);
+        border-color: lighten(#4caf50, 15%);
+        &:after {
+            background-color: #4caf50;
+            transform: scale(1.8);
+            opacity: 0;
+        }
     }
 }

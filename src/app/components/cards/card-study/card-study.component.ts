@@ -50,9 +50,9 @@ import { Card } from '../../../models/card';
             </div>
         </div>
         
-        <div *ngIf="!card">
-            <h1>You have no cards to study in this deck right now. Good job!</h1>
-            <a [routerLink]="['/deck', deckId]">Ok</a>
+        <div *ngIf="!card" class="study-done">
+            <p class="study-done-message">You have no cards to study in this deck right now. <br/> <strong>Good job!</strong></p>
+            <a [routerLink]="['/deck', deckId]" class="study-done-link">Ok</a>
         </div>        
     `,
     styleUrls: ['card-study.component.scss']

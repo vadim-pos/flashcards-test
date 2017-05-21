@@ -8,7 +8,7 @@ import { Card } from '../../models/card';
     selector: 'app-cards-list',
     template: `
         <div class="controls">
-            <a [routerLink]="['add']" class="add-card-btn"></a>
+            <a [routerLink]="['add']" class="add-card-btn" title="create card"></a>
             <a *ngIf="cards.length" [routerLink]="['study']" class="study-deck-btn">Study Deck</a>
             <span *ngIf="cards.length" class="cards-count">
                 {{cards.length + ' card' + (cards.length > 1 ? 's' : '')}}
@@ -16,9 +16,10 @@ import { Card } from '../../models/card';
             <span class="deck-name">{{deckName}}</span>
         </div>
 
-        <p *ngIf="!cards.length" class="intro">
-            You have no cards in this deck. Create one!
-        </p>
+        <div *ngIf="!cards.length" class="no-cards">
+            <p class="no-cards-message">You have no cards in this deck.</p>
+            <p class="no-cards-message">Click <span class="add-icon"></span> to create one!</p>
+        </div>
 
         <ul class="cards-list">
             <li class="cards-item" *ngFor="let card of cards">

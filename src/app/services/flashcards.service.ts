@@ -91,7 +91,7 @@ export class FlashcardsService {
 /* decks examples, setting as default */
 const exampleDecks:Deck[] = [
     {
-        name: 'Chinease example',
+        name: 'Chinease',
         id: 1052414683911,
         cards: [
             {front: 'Good afternoon', back: '下午好 - Xiàwǔ hǎo', id: 136032 },

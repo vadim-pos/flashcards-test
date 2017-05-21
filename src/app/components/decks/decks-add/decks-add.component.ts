@@ -6,7 +6,7 @@ import { FlashcardsService } from '../../../services/flashcards.service';
     selector: 'app-decks-add',
     template: `
         <div class="form-toggle-wrap">
-            <button (click)="showAddForm = !showAddForm" class="form-toggle-btn" [class.close]="showAddForm"></button>
+            <button (click)="showAddForm = !showAddForm" [class.close]="showAddForm" class="form-toggle-btn" title="create deck"></button>
             <span class="form-toggle-hint" [class.active]="showAddForm">Create new deck</span>
         </div>
 

@@ -15,7 +15,8 @@ app-decks {
     flex-basis: 0;
     padding: 0;
     background-color: $black;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     transition: flex-basis .2s ease, padding .2s ease;
 
     &.active {
