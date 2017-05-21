@@ -2,68 +2,36 @@
 @import '../../assets/mixins';
 
 :host {
-    // display: block;
-    width: 600px; height: 600px;
-    margin: 6vh auto 0;
-    // box-shadow: longshadow(darken(#933932,16%), #933932, 30, 0.5);
-    // 
-    // 
     display: flex;
+    width: 600px; height: 600px;
+    margin: 4vh auto 0;
+    border-radius: 15px;
     box-shadow: 0 0 60px 3px rgba(0, 0, 0, 0.4);
     overflow: hidden;
-    border-radius: 15px;
 }
 
 app-decks {
-    // width: 30%;
-    // float: left;
-    
-    // height: 100%;
-    // border-right: 1px solid #ccc;
-    background-color: $black;
-
-    // flex-grow: 1;
-    // padding: 10px;
-    // flex-basis: 30%;
-    overflow: hidden;
     flex-shrink: 0;
-
-
     flex-basis: 0;
     padding: 0;
-
+    background-color: $black;
+    overflow: hidden;
     transition: flex-basis .2s ease, padding .2s ease;
 
     &.active {
-        padding: 10px;
         flex-basis: 30%;
+        padding: 10px;
     }
 }
 
-// .container {
-//     width: 100%;
-//     max-height: 600px;
-//     height: 100%;
-//     // margin: 0 auto;
-//     border-radius: 5px;
-//     // overflow: hidden;
-//     // box-shadow: 0 0px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-// }
-
 .main {
-    position: relative;
-    // width: 70%;
-    // height: 100%;
-    // float: right;
-    // overflow-x: hidden;
-    overflow: hidden;
-    background-color: #fff;
-
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    position: relative;
+    background-color: #fff;
+    overflow: hidden;
 
-    // flex-basis: 70%;
 }
 
 .app-header {
@@ -133,22 +101,11 @@ app-decks {
     }
     &.active {
         left: 16px;
+        &:after {
+            left: -8px;
+            content: 'arrow_back';
+        }
     }
-    &.active:after {
-        left: -8px;
-        // transform: rotate(180deg);
-        content: 'arrow_back';
-    }
-    &:hover:after {
-        transform: translateX(4px);
-    }
-    &.active:hover:after {
-        transform: translateX(-4px);
-    }
+    &:hover:after { transform: translateX(4px); }
+    &.active:hover:after { transform: translateX(-4px); }
 }
-
-// router-outlet {
-//     display: block;
-//     background-color: red;
-
-// }
