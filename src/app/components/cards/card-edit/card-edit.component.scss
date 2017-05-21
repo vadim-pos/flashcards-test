@@ -1,4 +1,5 @@
 @import '../../../../assets/variables';
+@import '../../../../assets/mixins';
 @import '../../../../assets/animations';
 
 $cancelColor: #ff9800;
@@ -39,18 +40,18 @@ $saveColor: #4caf50;
         box-shadow: 0 0px 3px rgba(214, 66, 80, 1), 0 1px 2px rgba(214, 66, 80, 1);
         ~ .text-field-label {
             top: -19px; left: 0;
-            font-size: 12px;
+            font-size: rem(12px);
             color: $red;
-            &:before { font-size: 14px; }
+            &:before { font-size: rem(14px); }
         }
     }
     &.ng-valid {
         ~ .text-field-label {
             top: -19px; left: 0;
-            font-size: 12px;
+            font-size: rem(12px);
             color: $red;
             &:before {
-                font-size: 16px;
+                font-size: rem(16px);
                 font-weight: bold;
                 content: 'check';
             }
@@ -64,14 +65,13 @@ $saveColor: #4caf50;
     padding-left: 20px;
     font-family: $lato-medium;
     color: #4c4c4c;
-    font-size: 14px;
     transition: all 0.125s cubic-bezier(0.2, 0, 0.03, 1);
     &:before {
         position: absolute;
         left: 0; top: 50%;
         transform: translateY(-50%);
         font-family: 'Material Icons';
-        font-size: 16px;
+        font-size: rem(16px);
         content: 'edit';
     }
 }
@@ -83,7 +83,7 @@ $saveColor: #4caf50;
     margin: 0 4px;
     padding: 6px 16px 6px 24px;
     font-family: $lato-medium;
-    font-size: 12px;
+    font-size: rem(12px);
     color: $black;
     
     border-radius: 20px;
@@ -97,7 +97,7 @@ $saveColor: #4caf50;
         left: 6px; top: 50%;
         transform: translateY(-50%);
         font-family: 'Material Icons';
-        font-size: 14px;
+        font-size: rem(14px);
     }
 
     &:after {

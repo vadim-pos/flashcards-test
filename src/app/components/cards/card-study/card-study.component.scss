@@ -25,7 +25,6 @@
     transform-style: preserve-3d;
     transition: transform .5s .1s;
     box-shadow: 0 0px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    font-size: 14px;
     text-align: center;
     animation: slideIn .6s ease;
 
@@ -51,11 +50,11 @@
     width: 100%;
     height: 100%;
     opacity: 0;
-    backface-visibility: hidden;
-    transition: opacity .4s .5s;
-    background-color: #fff;
     transform: rotateY( 180deg );
     -ms-transform: rotateX(180deg);
+    backface-visibility: hidden;
+    background-color: #fff;
+    transition: opacity .4s .5s;
 }
 
 .card-front {
@@ -79,18 +78,18 @@
     z-index: 1;
     padding: 6px 16px 6px 28px;
     font-family: $lato-bold;
-    font-size: 12px;
+    font-size: rem(12px);
     color: #4c4c4c;
+    text-decoration: none;
+    background-color: transparent;
     border: 1px solid #a2a2a2;
     border-radius: 20px;
-    text-decoration: none;
     outline: none;
-    transition: all .2s, opacity .3s, color .1s;
-    background-color: transparent;
     cursor: pointer;
+    transition: all .2s, opacity .3s, color .1s;
     &:hover {
-        border-color: $red;
         color: #fff;
+        border-color: $red;
         background-color: $red;
     }
     &:before {
@@ -98,20 +97,18 @@
         left: 6px; top: 50%;
         transform: translateY(-50%);
         font-family: 'Material Icons';
-        font-size: 16px;
+        font-size: rem(16px);
         content: 'rotate_90_degrees_ccw'
     }
     &:after {
         position: absolute;
-        top: -25%;
-        left: -2px;
+        top: -25%; left: -2px;
+        width: 100%; height: 150%;
         padding: 2px;
         z-index: -1;
-        pointer-events: none;
-        width: 100%;
-        height: 150%;
         border-radius: 50%;
         content: '';
+        pointer-events: none;
         transition: transform 0.2s, opacity 0.2s, background-color .1s;
     }
 
@@ -119,9 +116,9 @@
         background-color: lighten($red, 10%);
         border-color: lighten($red, 10%);
         &:after {
-            background-color: $red;
             transform: scale(1.8);
             opacity: 0;
+            background-color: $red;
         }
     }
 }
@@ -138,13 +135,13 @@
     position: relative;
     margin: 0 0 10px;
     padding-right: 20px;
-    font-size: 12px;
+    font-size: rem(12px);
     &:after {
         position: absolute;
         right: 0; top: 50%;
         transform: translateY(-50%);
         font-family: 'Material Icons';
-        font-size: 16px;
+        font-size: rem(16px);
         color: $red;
         content: 'arrow_downward';
     }
@@ -160,29 +157,24 @@
     position: relative;
     z-index: 1;
     margin: 0 2px;
-    font-size: 24px;
+    font-family: 'Material Icons';
+    font-size: rem(24px);
     color: $black;
-    
-    border-radius: 20px;
-    outline: none;
     text-decoration: none;
     background-color: transparent;
+    border-radius: 20px;
+    border: none;
+    outline: none;
     cursor: pointer;
     transition: all .1s;
-    
-    font-family: 'Material Icons';
-    border: none;
-
     &:after {
         position: absolute;
-        top: -25%;
-        left: 0;
+        width: 100%; height: 150%;
+        top: -25%; left: 0;
         z-index: -1;
-        pointer-events: none;
-        width: 100%;
-        height: 150%;
         border-radius: 50%;
         content: '';
+        pointer-events: none;
         transition: transform 0.2s, opacity 0.2s, background-color .1s;
     }
     &:hover { transform: scale(1.2); }
@@ -231,24 +223,22 @@
     transition: all 0.2s;
 
     &:before {
-        content: 'clear';
         position: absolute;
         left: 50%; top: 50%;
         transform: translate(-50%, -50%);
-        font-size: 18px;
+        font-size: rem(18px);
+        content: 'clear';
     }
 
     &:after {
         position: absolute;
-        top: -2px;
-        left: -2px;
+        width: 100%; height: 100%;
+        top: -2px; left: -2px;
         padding: 2px;
         z-index: -1;
-        pointer-events: none;
-        width: 100%;
-        height: 100%;
         border-radius: 50%;
         content: '';
+        pointer-events: none;
         transition: transform 0.1s, opacity 0.3s, background-color .1s;
     }
 
@@ -299,7 +289,7 @@
     position: relative;
     z-index: 1;
     margin: 0 4px;
-    padding: 6px 20px 6px 24px;
+    padding: 4px 24px 4px 28px;
     font-family: $lato-medium;
     font-size: rem(14px);    
     border: 1px solid #8bc34a;
@@ -315,19 +305,17 @@
         left: 6px; top: 50%;
         transform: translateY(-50%);
         font-family: 'Material Icons';
-        font-size: 14px;
+        font-weight: bold;
         content: 'check';
     }
     &:after {
         position: absolute;
-        top: -25%;
-        left: 0;
+        top: -25%; left: 0;
         z-index: -1;
-        pointer-events: none;
-        width: 100%;
-        height: 150%;
+        width: 100%; height: 150%;
         border-radius: 50%;
         content: '';
+        pointer-events: none;
         transition: transform 0.2s, opacity 0.2s, background-color .1s;
     }
     &:hover {

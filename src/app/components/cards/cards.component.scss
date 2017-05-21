@@ -5,7 +5,6 @@
 :host {
     display: flex;
     flex-direction: column;
-    overflow-y: hidden;
 }
 
 /* ------------------------- CONTROLS ----------------------- */
@@ -24,7 +23,6 @@
     margin-right: 40px;
     padding-top: 7px;
     font-family: $lato;
-    font-size: 14px;
     color: #fff;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -35,7 +33,6 @@
     float: right;
     padding-top: 7px;
     font-family: $lato;
-    font-size: 14px;
     color: #fff;
 }
 
@@ -46,42 +43,36 @@
     width: 26px; height: 26px;
     margin-top: 3px;
     font-family: 'Material Icons';
-    // color: $red;
     background-color: transparent;
-    // border: 2px solid $red;
+    border: 2px solid #fff;
     border-radius: 50%;
     z-index: 1;
     transition: all 0.2s;
-
     color: #fff;
-    border: 2px solid #fff;
 
     &:before {
         content: 'add';
         position: absolute;
         left: 50%; top: 50%;
         transform: translate(-50%, -50%);
-        font-size: 18px;
+        font-size: rem(18px);
     }
 
     &:after {
         position: absolute;
-        top: -2px;
-        left: -2px;
+        width: 100%; height: 100%;
+        top: -2px; left: -2px;
         padding: 2px;
         z-index: -1;
-        pointer-events: none;
-        width: 100%;
-        height: 100%;
         border-radius: 50%;
         content: '';
+        pointer-events: none;
         transition: transform 0.2s, opacity 0.3s, background-color .2s;
     }
 
     &:active {
         color: $red;
         &:after {
-            // background-color: $red;
             background-color: #fff;
             transform: scale(1.8);
             opacity: 0;
@@ -89,40 +80,31 @@
     }
 
     &:hover {
-        // color: #fff;
         color: $red;
-        // background-color: $red;
         background-color: #fff;
     }
 }
 
 .study-deck-btn {
-    // float: left;
     position: relative;
     display: inline-block;
     margin-left: 14px;
     padding: 6px 20px 6px 34px;
     font-family: $lato-heavy;
-    font-size: 12px;
-    // font-weight: bold;
-    // color: $red;
+    font-size: rem(12px);
     color: #fff;
+    border: 2px solid #fff;
+    border-radius: 20px;
     text-decoration: none;
     overflow: hidden;
     transition: all .2s ease;
-
-    // border: 1px solid $red;
-    border: 2px solid #fff;
-    border-radius: 20px;
-
     &:before, &:after {
-        font-family: 'Material Icons';
         position: absolute;
-        font-size: 22px;
         left: 0; top: 50%;
-        transform: translateY(-50%);
         padding: 6px;
-        // color: $red;
+        font-family: 'Material Icons';
+        font-size: rem(22px);
+        transform: translateY(-50%);
         color: #fff;
         transition: all .2s ease;
     }
@@ -136,11 +118,9 @@
     }
 
     &:hover {
-        // background-color: $red;
-        background-color: #fff;
-        // color: #fff;
         color: $red;
-        &:before, &:after { /* color: #fff; */ color: $red; }
+        background-color: #fff;
+        &:before, &:after { color: $red; }
         &:before { transform: translateY(-150%); }
         &:after { transform: translateY(-50%); }
     }
@@ -186,7 +166,6 @@
 /* ------------------------------------------------------ */
 
 .cards-list {
-    // height: calc(100% - 60px);
     margin: 0;
     padding: 20px 0 10px;
     list-style: none;
@@ -218,11 +197,10 @@
     &:after {
         position: absolute;
         bottom: 0; left: 5%;
-        height: 10px;
-        width: 90%;
+        height: 10px; width: 90%;
         opacity: 0;
-        background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, transparent 80%);
         z-index: -1;
+        background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, transparent 80%);
         content: '';
         transition: transform .2s, opacity .2s;
         pointer-events: none;
@@ -243,8 +221,6 @@
     margin-bottom: 20px;
     padding: 0 6px;
     font-family: $lato;
-    // font-weight: bold;
-    font-size: 14px;
     color: #4c4c4c;
     white-space: pre-wrap;
 }
@@ -252,20 +228,20 @@
 .cards-item-edit, .cards-item-study {
     display: inline-block;
     position: relative;
-    z-index: 1;
     margin: 0 4px;
     padding: 6px 16px 6px 24px;
+    opacity: 0;
+    z-index: 1;
     font-family: $lato-bold;
-    font-size: 12px;
+    font-size: rem(12px);
     color: #4c4c4c;
+    text-decoration: none;
     border: 1px solid #a2a2a2;
     border-radius: 20px;
-    text-decoration: none;
-    opacity: 0;
     transition: all .2s, opacity .3s, color .1s;
     &:hover {
-        border-color: $red;
         color: #fff;
+        border-color: $red;
         background-color: $red;
     }
 
@@ -274,20 +250,18 @@
         left: 6px; top: 50%;
         transform: translateY(-50%);
         font-family: 'Material Icons';
-        font-size: 14px;
+        font-size: rem(14px);
     }
 
     &:after {
         position: absolute;
-        top: -25%;
-        left: -2px;
+        width: 100%; height: 150%;
+        top: -25%; left: -2px;
         padding: 2px;
         z-index: -1;
-        pointer-events: none;
-        width: 100%;
-        height: 150%;
         border-radius: 50%;
         content: '';
+        pointer-events: none;
         transition: transform 0.2s, opacity 0.2s, background-color .1s;
     }
 
@@ -295,9 +269,9 @@
         border-color: lighten($red, 10%);
         background-color: lighten($red, 10%);
         &:after {
-            background-color: $red;
             transform: scale(1.8);
             opacity: 0;
+            background-color: $red;
         }
     }
 }

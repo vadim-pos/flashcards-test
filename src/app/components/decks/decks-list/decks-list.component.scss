@@ -12,7 +12,6 @@
     position: relative;
     margin-bottom: 10px;
     font-family: $lato-light;
-    font-size: 1rem;
     border-radius: 5px;
     overflow: hidden;
     &.active:hover {
@@ -34,8 +33,8 @@
     text-decoration: none;
     transition: color .2s;
     &:hover {
-        &:before { transform: scale(1.6); }
         color: $red;
+        &:before { transform: scale(1.6); }
     }
     &:before {
         position: absolute;
@@ -75,19 +74,17 @@
     transition: .2s ease;
     &:before {
         position: absolute;
-        left: 0; top: 2px;
         width: 100%; height: 100%;
-        // left: 50%; top: 50%;
-        // transform: translate(-50%, -50%);
+        left: 0; top: 2px;
         transition: transform .2s ease;
         content: 'edit';
     }
     &:after {
         position: absolute;
         width: 100%; height: 100%;
+        top: -2px; left: -2px;
         transform: scale(0);
         opacity: 0;
-        top: -2px; left: -2px;
         padding: 2px;
         z-index: -1;
         border-radius: 50%;
@@ -103,33 +100,24 @@
             opacity: 1;
         }
     }
-    &:hover {
-        &:before {
-            transform: scale(1.3);
-        }
-    }
+    &:hover:before { transform: scale(1.3); }
 }
 
 .edit-form {
     position: absolute;
     top: 0; left: 0;
     transform: translateX(-100%);
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
     z-index: 10;
     transition: transform .2s ease;
-    &.active {
-        transform: translateX(0);
-    }
+    &.active { transform: translateX(0); }
 }
 
 .edit-text {
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
     padding: 4px 44px 4px 10px;
     font-family: $lato-light;
     font-weight: bold;
-    font-size: 1rem;
     color: #fff;
     background-color: $red;
     border: none;
@@ -153,20 +141,14 @@
         position: absolute;
         width: 100%; height: 100%;
         left: 0; top: 2px;
-        // transform: translate(-50%, -50%);
         transition: transform .1s ease;
         content: 'done';
     }
     &:hover {
         font-weight: bold;
-        &:before {
-            transform: scale(1.1);
-        }
+        &:before { transform: scale(1.1); }
     }
-    &:active:before {
-        transform: scale(1.4);
-        // font-size: 22px;
-    }
+    &:active:before { transform: scale(1.4); }
 }
 
 .edit-remove {
@@ -186,7 +168,6 @@
         position: absolute;
         width: 100%; height: 100%;
         left: 0; top: 2px;
-        // transform: translate(-50%, -50%);
         transition: transform .1s ease;
         content: 'delete';
     }
@@ -197,7 +178,5 @@
             transform: scale(1.1);
         }
     }
-    &:active:before {
-        transform: scale(1.4);
-    }
+    &:active:before { transform: scale(1.4); }
 }
