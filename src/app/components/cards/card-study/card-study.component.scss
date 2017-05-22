@@ -40,7 +40,7 @@
 }
 
 .card-back, .card-front {
-    padding-top: 20px;
+    padding: 20px 0;
     font-family: $lato-medium;
     color: #4c4c4c;
 }
@@ -149,7 +149,6 @@
 
 .rate-btns {
     font-size: 0; // remove empty space for inline-blocks
-    margin-bottom: 20px;
 }
 
 .rate-btn {

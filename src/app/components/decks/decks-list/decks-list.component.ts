@@ -5,6 +5,10 @@ import { Subscription } from 'rxjs/Subscription';
 import { FlashcardsService } from '../../../services/flashcards.service';
 import { Deck } from '../../../models/deck';
 
+/**
+ * DecksListComponent
+ * Renders list of decks with corresponding edit forms 
+ */
 @Component({
     selector: 'app-decks-list',
     template: `

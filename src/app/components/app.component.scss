@@ -3,7 +3,7 @@
 
 :host {
     display: flex;
-    width: 600px; height: 600px;
+    width: 700px; height: 700px;
     margin: 4vh auto 0;
     border-radius: 15px;
     box-shadow: 0 0 60px 3px rgba(0, 0, 0, 0.4);
@@ -38,7 +38,6 @@ app-decks {
 .app-header {
     position: relative;
     padding: 10px 0 10px 0;
-    text-transform: uppercase;
     background-color: $red;
 }
 
@@ -55,6 +54,7 @@ app-decks {
     letter-spacing: 4px;
     color: #fff;
     text-decoration: none;
+    text-transform: uppercase;
     transition: color .1s;
     &:before {
         position: absolute;

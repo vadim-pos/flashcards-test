@@ -4,16 +4,20 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FlashcardsService } from '../../../services/flashcards.service';
 import { Card } from '../../../models/card';
 
+/**
+ * CardEditComponent
+ * Rexponsible for edititng and creating new card in selected deck.
+ */
 @Component({
     selector: 'app-card-edit',
     template: `
         <form #form="ngForm" (ngSubmit)="onSubmit()" class="card-form">
             <div class="form-group">
-                <textarea [(ngModel)]="card.front" class="text-field" id="front" name="front" cols="30" rows="8" required></textarea>
+                <textarea [(ngModel)]="card.front" class="text-field" id="front" name="front" cols="30" rows="6" required></textarea>
                 <label *ngIf="!editingMode" class="text-field-label" for="front">Front side</label>
             </div>
             <div class="form-group">
-                <textarea [(ngModel)]="card.back" class="text-field" id="back" name="back" cols="30" rows="8" required></textarea>
+                <textarea [(ngModel)]="card.back" class="text-field" id="back" name="back" cols="30" rows="6" required></textarea>
                 <label *ngIf="!editingMode" class="text-field-label" for="back">Back side</label>
             </div>
             <div class="form-group">

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
+/**
+ * IntroComponent
+ * Contains app introduction information. Showing on the root ('/') route. 
+ */
 @Component({
     selector: 'app-intro',
     template: `

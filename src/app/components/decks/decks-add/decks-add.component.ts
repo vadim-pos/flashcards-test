@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 
 import { FlashcardsService } from '../../../services/flashcards.service';
 
+/**
+ * DecksAddComponent
+ * Contains switchable form for creting new deck of cards
+ */
 @Component({
     selector: 'app-decks-add',
     template: `

@@ -4,6 +4,10 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FlashcardsService } from '../../services/flashcards.service';
 import { Card } from '../../models/card';
 
+/**
+ * CardsComponent
+ * Renders cards of selected deck. Contains controls bar.
+ */
 @Component({
     selector: 'app-cards-list',
     template: `

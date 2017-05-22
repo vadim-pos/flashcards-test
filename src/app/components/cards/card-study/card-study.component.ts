@@ -4,6 +4,10 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FlashcardsService } from '../../../services/flashcards.service';
 import { Card } from '../../../models/card';
 
+/**
+ * CardStudyComponent
+ * Rexponsible for studying a single card or a whole deck of cards.
+ */
 @Component({
     selector: 'app-card-study',
     template: `
