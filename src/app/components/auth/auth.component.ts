@@ -13,25 +13,33 @@ import { FlashcardsService } from '../../services/flashcards.service';
             <p class="form-title">Sign Up</p>
             <form #SignUpFrom="ngForm" (ngSubmit)="onSignUp(SignUpFrom)">
                 <div class="form-group">
-                    <input #signUpEmail ngModel email required id="sign-up-email" class="form-input" name="email" type="email"/>
+                    <input #signUpEmail="ngModel" ngModel email required id="sign-up-email" class="form-input" name="email" type="email"/>
                     <label [class.active]="!!signUpEmail.value" class="input-field-label email" for="sign-up-email">email</label>
-                    <small [class.active]="signUpEmail.invalid" class="input-error">valid email is required</small>
+                    <small [class.active]="signUpEmail.invalid && signUpEmail.touched" class="input-error">valid email is required</small>
                 </div>
                 <div class="form-group">
-                    <input #signUpPwd ngModel required minlength="6" id="sign-up-pwd" class="form-input" name="password" type="password"/>
+                    <input #signUpPwd="ngModel" ngModel required minlength="6" id="sign-up-pwd" class="form-input" name="password" type="password"/>
                     <label [class.active]="!!signUpPwd.value" class="input-field-label password" for="sign-up-pwd">password</label>
-                    <small class="input-error">6 characters password is required</small>
+                    <small [class.active]="signUpPwd.invalid && signUpPwd.touched" class="input-error">6 characters password is required</small>
                 </div>
-                <button class="form-submit-btn" type="submit">Sign Up</button>
+                <button [disabled]="SignUpFrom.invalid" class="form-submit-btn" type="submit">Sign Up</button>
             </form>
         </div>
         
         <div class="auth-form sign-in">
             <p class="form-title">Sign In</p>
-            <form #SignInFrom="ngForm" (ngSubmit)="onSignIn(SignInFrom)">
-                <input ngModel name="email" type="email" placeholder="email" />
-                <input ngModel name="password" type="password" placeholder="password" />
-                <button type="submit">Sign In</button>
+            <form #SignInForm="ngForm" (ngSubmit)="onSignIn(SignInForm)">
+                <div class="form-group">
+                    <input #signInEmail="ngModel" ngModel email required id="sign-in-email" class="form-input" name="email" type="email"/>
+                    <label [class.active]="!!signInEmail.value" class="input-field-label email" for="sign-in-email">email</label>
+                    <small [class.active]="signInEmail.invalid && signInEmail.touched" class="input-error">valid email is required</small>
+                </div>
+                <div class="form-group">
+                    <input #signInPwd="ngModel" ngModel required minlength="6" id="sign-in-pwd" class="form-input" name="password" type="password"/>
+                    <label [class.active]="!!signInPwd.value" class="input-field-label password" for="sign-in-pwd">password</label>
+                    <small [class.active]="signInPwd.invalid && signInPwd.touched" class="input-error">6 characters password is required</small>
+                </div>
+                <button [disabled]="SignInForm.invalid" class="form-submit-btn" type="submit">Sign In</button>
             </form>
         </div>
     `,
