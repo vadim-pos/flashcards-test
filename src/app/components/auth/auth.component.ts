@@ -9,20 +9,33 @@ import { FlashcardsService } from '../../services/flashcards.service';
 @Component({
     selector: 'app-auth',
     template: `
-        <p>Sign Up</p>
-        <form #SignUpFrom="ngForm" (ngSubmit)="onSignUp(SignUpFrom)">
-            <input ngModel name="email" type="email" placeholder="email" />
-            <input ngModel name="password" type="password" placeholder="password" />
-            <button type="submit">Sign Up</button>
-        </form>
-
-        <p>Sign In</p>
-        <form #SignInFrom="ngForm" (ngSubmit)="onSignIn(SignInFrom)">
-            <input ngModel name="email" type="email" placeholder="email" />
-            <input ngModel name="password" type="password" placeholder="password" />
-            <button type="submit">Sign In</button>
-        </form>
-    `
+        <div class="auth-form sign-up">
+            <p class="form-title">Sign Up</p>
+            <form #SignUpFrom="ngForm" (ngSubmit)="onSignUp(SignUpFrom)">
+                <div class="form-group">
+                    <input #signUpEmail ngModel email required id="sign-up-email" class="form-input" name="email" type="email"/>
+                    <label [class.active]="!!signUpEmail.value" class="input-field-label email" for="sign-up-email">email</label>
+                    <small [class.active]="signUpEmail.invalid" class="input-error">valid email is required</small>
+                </div>
+                <div class="form-group">
+                    <input #signUpPwd ngModel required minlength="6" id="sign-up-pwd" class="form-input" name="password" type="password"/>
+                    <label [class.active]="!!signUpPwd.value" class="input-field-label password" for="sign-up-pwd">password</label>
+                    <small class="input-error">6 characters password is required</small>
+                </div>
+                <button class="form-submit-btn" type="submit">Sign Up</button>
+            </form>
+        </div>
+        
+        <div class="auth-form sign-in">
+            <p class="form-title">Sign In</p>
+            <form #SignInFrom="ngForm" (ngSubmit)="onSignIn(SignInFrom)">
+                <input ngModel name="email" type="email" placeholder="email" />
+                <input ngModel name="password" type="password" placeholder="password" />
+                <button type="submit">Sign In</button>
+            </form>
+        </div>
+    `,
+    styleUrls: ['auth.component.scss']
 })
 export class AuthComponent {
 

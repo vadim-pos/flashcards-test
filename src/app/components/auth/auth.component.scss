@@ -1,0 +1,93 @@
+@import '../../../assets/variables';
+@import '../../../assets/mixins';
+
+.auth-form {
+    text-align: center;
+}
+
+.form-group {
+    position: relative;
+    width: 40%;
+    margin: 0 auto 10px;
+    // &:nth-child(2) { margin-bottom: 0; }
+}
+
+.form-input {
+    width: 100%;
+    padding: 4px 0;
+    font-size: rem(14px);
+    border-width: 0 0 1px;
+    border-color: #ccc;
+    outline: none;
+    // border-bottom: 1px solid $red;
+    transition: .1s;
+    &:focus {
+        border-color: $red;
+        ~ .input-field-label {
+            transform: translateX(-120%);
+            font-size: rem(12px);
+            // &:before { font-size: rem(14px); }
+        }
+    }
+}
+
+.input-field-label {
+    position: absolute;
+    top: 4px; left: 0;
+    padding-left: 18px;
+    transition: all 0.125s cubic-bezier(0.2, 0, 0.03, 1);
+    // color: $red;
+    &:before {
+        position: absolute;
+        left: 0; top: 50%;
+        transform: translateY(-50%);
+        font-family: 'Material Icons';
+        // font-size: rem(14px);
+    }
+    &.email:before {
+        content: 'email';
+    }
+    &.password:before {
+        content: 'vpn_key';
+    }
+    &.active {
+        transform: translateX(-120%);
+        font-size: rem(12px);
+    }
+}
+
+.input-error {
+    // visibility: hidden;
+    // opacity: 0;
+    color: $red;
+    font-size: rem(12px);
+    pointer-events: none;
+    // transform: translateX(-100%);
+    transition: .2s ease; 
+    &.active {
+        visibility: visible;
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.form-submit-btn {
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    padding: 6px 20px 6px 20px;
+    font-family: $lato-medium;
+    font-size: rem(12px);
+    color: $black;
+    
+    border-radius: 20px;
+    outline: none;
+    text-decoration: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all .2s;
+
+    border: 1px solid #ddd;
+    background-color: #ddd;
+    color: #fff;
+}
