@@ -29,6 +29,8 @@
     "@angular/router": "^4.0.0",
     "core-js": "^2.4.1",
     "express": "^4.15.3",
+    "firebase": "^4.0.0",
+    "promise-polyfill": "^6.0.2",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4"
   },

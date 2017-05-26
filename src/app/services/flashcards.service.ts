@@ -3,25 +3,45 @@ import { Subject } from 'rxjs/Subject';
 
 import { Deck } from '../models/deck';
 import { Card } from '../models/card';
+import { FirebaseService } from './firebase.service';
 
 @Injectable()
 export class FlashcardsService {
     decks:Deck[] = [];
     decksUpdated:Subject<void> = new Subject<void>();
 
-    constructor() {
-        this.decks = JSON.parse(localStorage.getItem('flashcards')) || exampleDecks;
+    constructor(private firebaseService:FirebaseService) {
+        // this.decks = JSON.parse(localStorage.getItem('flashcards')) || exampleDecks;
+        // this.loadFLashcards();
+    }
+
+    loadFlashcards():firebase.Promise<any> {
+        return this.firebaseService.loadFlashcards() // returns promise thenable object
+            .then(dataSnapshot => {
+                const loadedData = dataSnapshot.val();
+                if (loadedData) {
+                    const loadedDecks = loadedData.decks;
+                /* firebase can't handle empty arrays, so if no cards specified in the deck - set it as [] */
+                    loadedDecks.forEach(deck => deck.cards ? null : deck.cards = []);
+                    this.decks = loadedDecks;
+                    this.decksUpdated.next();
+                } else {
+                    this.decks = exampleDecks; // if no decks was loaded - set default decks
+                    this.decksUpdated.next();
+                }
+            })
+            .catch(err => console.log(err));
     }
 
     saveFlashcards() {
-        localStorage.setItem('flashcards', JSON.stringify(this.decks));
+        // localStorage.setItem('flashcards', JSON.stringify(this.decks));
+        this.firebaseService.saveFlashcards(this.decks);
     }
 
     getDecks():Deck[] {
         return this.decks.slice();
     }
 
-    /* helper method */
     getDeckById(deckId:number):Deck {
         return this.decks.filter(deck => deck.id === deckId)[0];
     }
@@ -31,7 +51,6 @@ export class FlashcardsService {
     }
 
     getDeckCard(deckId:number, cardId:number):Card {
-        /* return card copy (using object spread) */
         return {...this.getDeckById(deckId).cards.filter(card => card.id === cardId)[0]};
     }
 
@@ -87,6 +106,8 @@ export class FlashcardsService {
         this.saveFlashcards();
     }
 }
+
+/* -------------------------------------------------------------------- */
 
 /* decks examples, setting as default */
 const exampleDecks:Deck[] = [

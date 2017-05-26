@@ -6,14 +6,18 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './components/app.component';
 import { DecksComponent } from './components/decks/decks.component';
+import { CardsComponent } from './components/cards/cards.component';
 import { CardEditComponent } from './components/cards/card-edit/card-edit.component';
 import { CardStudyComponent } from './components/cards/card-study/card-study.component';
 import { IntroComponent } from './components/intro/intro.component';
 import { DecksListComponent } from './components/decks/decks-list/decks-list.component';
 import { DecksAddComponent } from './components/decks/decks-add/decks-add.component';
+import { AuthComponent } from './components/auth/auth.component';
 
 import { FlashcardsService } from './services/flashcards.service';
-import { CardsComponent } from './components/cards/cards.component';
+import { FirebaseService } from './services/firebase.service';
+import { AuthGuardService } from './services/auth-guard.service';
+
 
 import { routes } from './routes';
 
@@ -26,7 +30,8 @@ import { routes } from './routes';
     CardStudyComponent,
     IntroComponent,
     DecksListComponent,
-    DecksAddComponent
+    DecksAddComponent,
+    AuthComponent
 ],
   imports: [
     BrowserModule,
@@ -35,7 +40,9 @@ import { routes } from './routes';
     RouterModule.forRoot(routes)
   ],
   providers: [
-    FlashcardsService
+    FlashcardsService,
+    FirebaseService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })
