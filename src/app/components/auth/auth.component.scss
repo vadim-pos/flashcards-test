@@ -7,7 +7,7 @@
 
 .form-group {
     position: relative;
-    width: 40%;
+    width: 46%;
     margin: 0 auto 14px;
     // &:nth-child(2) { margin-bottom: 0; }
 }
@@ -26,6 +26,7 @@
         ~ .input-field-label {
             transform: translateX(-120%);
             font-size: rem(12px);
+            &:after { visibility: hidden; }
             // &:before { font-size: rem(14px); }
         }
     }
@@ -33,7 +34,7 @@
 
 .input-field-label {
     position: absolute;
-    top: 4px; left: 0;
+    top: 12px; left: 0;
     padding-left: 18px;
     transition: all 0.125s cubic-bezier(0.2, 0, 0.03, 1);
     // color: $red;
@@ -44,51 +45,145 @@
         font-family: 'Material Icons';
         // font-size: rem(14px);
     }
-    &.email:before {
-        content: 'email';
+    &:after {
+        position: absolute;
+        left: 20px; top: 50%;
+        white-space: nowrap;
+        transform: translateY(-50%);
     }
-    &.password:before {
-        content: 'vpn_key';
-    }
+    &.email:before { content: 'email'; }
+    &.email:after { content: 'email'; }
+    &.password:before, &.password-repeat:before { content: 'vpn_key'; }
+    &.password:after { content: 'password'; }
+    &.password-repeat:after { content: 'repeat password'; }
     &.active {
         transform: translateX(-120%);
         font-size: rem(12px);
+        &:after { visibility: hidden; }
     }
 }
 
 .input-error {
     display: block;
-    visibility: hidden;
+    // visibility: hidden;
     opacity: 0;
     color: $red;
     font-size: rem(12px);
     pointer-events: none;
-    transform: translateX(-100%);
+    // transform: translateX(-100%);
     transition: .2s ease; 
     &.active {
-        visibility: visible;
+        // visibility: visible;
         opacity: 1;
-        transform: translateX(0);
+        // transform: translateX(0);
     }
 }
 
-.form-submit-btn {
-    display: inline-block;
+/* ----------------- AUTHENTICATION ERROR BLOCK --------------- */
+/* ------------------------------------------------------------ */
+
+.auth-error {
     position: relative;
-    z-index: 1;
+    width: 70%;
+    margin: 0 auto;
+    padding: 0 20px;
+    &:before {
+        position: absolute;
+        top: 50%; left: -18px;
+        transform: translateY(-50%);
+        font-family: 'Material Icons';
+        font-size: rem(24px);
+        color: $red;
+        content: 'priority_high';
+    }
+}
+
+.auth-error-message {
+    margin: 0 0 20px;
+    color: $red;
+    border-left: 2px solid $red;
+}
+
+.auth-error-close {
+    position: absolute;
+    width: 20px; height: 20px;
+    right: -5px; top: 0;
+    font-family: 'Material Icons';
+    font-size: rem(14px);
+    color: $red;
+    background-color: transparent;
+    border: 1px solid $red;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    transition: .1s;
+    &:before {
+        position: absolute;
+        top: 2px; left: 2px;
+        content: 'clear';
+    }
+    &:hover {
+        color: #fff;
+        background-color: $red;
+    }
+}
+
+
+/* -------------------- FORM SUBMIT BUTTON ------------------ */
+/* ---------------------------------------------------------- */
+
+.form-submit-btn {
+    position: relative;
     padding: 6px 20px 6px 20px;
-    font-family: $lato-medium;
-    font-size: rem(12px);
-    color: $black;
-    
+    z-index: 1;
+    color: $red;
+    background-color: transparent;
+    border: 1px solid $red;
     border-radius: 20px;
     outline: none;
-    text-decoration: none;
-    background-color: transparent;
     cursor: pointer;
-    transition: all .2s;
+    transition: .1s;
+    // &:before {
+    //     position: absolute;
+    //     width: 100%; height: 100%;
+    //     top: -2px; left: -2px;
+    //     padding: 2px;
+    //     z-index: -1;
+    //     opacity: 0;
+    //     border-radius: 50%;
+    //     content: '';
+    //     background-color: $red;
+    //     pointer-events: none;
+    //     transition: transform 0.2s, opacity 0.2s, background-color .1s;
+    //     transform: scale(2);
+    // }
+    &:before {
+        position: absolute;
+        width: 100%; height: 150%;
+        top: -25%; left: 0;
+        opacity: 0;
+        transform: scale(1.8);
+        z-index: -1;
+        background-color: $red;
+        border-radius: 50%;
+        content: '';
+        pointer-events: none;
+        transition: transform 0.2s, opacity 0.2s, background-color .1s;
+    }
+    &[disabled] {
+        color: #afb1be;
+        border-color: #afb1be;
+        cursor: default;
+        &:before {
+            transform: scale(0);
+            opacity: 1;
+            background-color: transparent;
+        }
+    }
 
-    border: 1px solid #ddd;
-    background-color: #ddd;
-    color: #fff;
+    &:not([disabled]):hover {
+        background-color: $red;
+        color: #fff;
+    }
+    &:not([disabled]):active { box-shadow: 0 0 20px 1px $red; }
 }
