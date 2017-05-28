@@ -12,12 +12,10 @@ export class FirebaseService {
     authStateChanged:Subject<boolean> = new Subject<boolean>();
 
     constructor() {
-        const config = {
-            apiKey: "AIzaSyCq4qVj6NMEyUSqdy00Jet8xZkd6V4wxRg",
-            authDomain: "ng-flashcards-ee871.firebaseapp.com",
-            databaseURL: "https://ng-flashcards-ee871.firebaseio.com",
-        };
-        firebase.initializeApp(config);
+        throw "Add your config in firebase service, Ok?!";
+        
+        // const config = {...};
+        // firebase.initializeApp(config);
 
         this.dbRef = firebase.database().ref();
 
