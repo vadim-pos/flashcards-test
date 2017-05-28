@@ -32,15 +32,35 @@
     & strong {
         display: block;
         padding-bottom: 8px;
-        font-size: rem(16px);
+        font-size: rem(18px);
         font-weight: bold;
         color: $red;
     }
 }
 
 .form-toggle-link {
+    display: inline-block;
+    position: relative;
+    margin-left: 6px;
     color: $red;
     cursor: pointer;
+    transition: .2s;
+    &:before {
+        position: absolute;
+        top: 0; left: 0;
+        font-family: 'Material Icons';
+        font-size: rem(18px);
+        content: 'person';
+        opacity: 0;
+        transition: .1s;
+    }
+    &:active {
+        transform: scale(1.3);
+    }
+    &:hover {
+        padding-left: 20px;
+        &:before { opacity: 1; }
+    }
 }
 
 .form-group {
@@ -121,12 +141,12 @@
 
 .auth-error {
     position: relative;
-    width: 70%;
+    width: 60%;
     margin: 0 auto;
     padding: 0 20px;
     &:before {
         position: absolute;
-        top: 50%; left: -18px;
+        top: 50%; left: -10px;
         transform: translateY(-50%);
         font-family: 'Material Icons';
         font-size: rem(24px);
@@ -138,13 +158,12 @@
 .auth-error-message {
     margin: 0 0 20px;
     color: $red;
-    border-left: 2px solid $red;
 }
 
 .auth-error-close {
     position: absolute;
-    width: 20px; height: 20px;
-    right: -5px; top: 0;
+    width: 19px; height: 19px;
+    right: -10px; top: 0;
     font-family: 'Material Icons';
     font-size: rem(14px);
     color: $red;
@@ -159,11 +178,81 @@
         top: 2px; left: 2px;
         content: 'clear';
     }
+    &:after {
+        position: absolute;
+        width: 100%; height: 100%;
+        top: -2px; left: -2px;
+        padding: 2px;
+        z-index: -1;
+        border-radius: 50%;
+        content: '';
+        pointer-events: none;
+        transition: transform 0.1s, opacity 0.3s, background-color .1s;
+    }
     &:hover {
         color: #fff;
         background-color: $red;
     }
+    &:active {
+        color: #fff;
+        &:after {
+            background-color: $red;
+            transform: scale(1.8);
+            opacity: 0;
+        }
+    }
 }
+
+// .close-btn {
+//     display: inline-block;
+//     position: absolute;
+//     top: 6px; right: 6px;
+//     width: 22px; height: 22px;
+//     font-family: 'Material Icons';
+//     color: $red;
+//     background-color: transparent;
+//     border: none;
+//     border-radius: 50%;
+//     z-index: 1;
+//     outline: none;
+//     cursor: pointer;
+//     transition: all 0.2s;
+
+//     &:before {
+//         position: absolute;
+//         left: 50%; top: 50%;
+//         transform: translate(-50%, -50%);
+//         font-size: rem(18px);
+//         content: 'clear';
+//     }
+
+//     &:after {
+//         position: absolute;
+//         width: 100%; height: 100%;
+//         top: -2px; left: -2px;
+//         padding: 2px;
+//         z-index: -1;
+//         border-radius: 50%;
+//         content: '';
+//         pointer-events: none;
+//         transition: transform 0.1s, opacity 0.3s, background-color .1s;
+//     }
+
+//     &:active {
+//         color: $red;
+//         &:after {
+//             background-color: $red;
+//             transform: scale(1.8);
+//             opacity: 0;
+//         }
+//     }
+
+//     &:hover {
+//         color: #fff;
+//         border-color: $red;
+//         background-color: $red;
+//     }
+// }
 
 
 /* -------------------- FORM SUBMIT BUTTON ------------------ */
