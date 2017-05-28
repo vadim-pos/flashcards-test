@@ -1,41 +1,52 @@
 @import '../../../assets/variables';
 @import '../../../assets/mixins';
+@import '../../../assets/animations';
 
 :host {
     display: block;
     position: relative;
     height: 100%;
+    animation: fadeIn 1s linear;
 }
 
 .auth-form {
     text-align: center;
-
     position: absolute;
-    left: 0; top: 0;
     width: 100%;
-
+    left: 0; top: 0;
+    padding-top: 40px;
     transform: translateX(-100%);
-    // visibility: hidden;
     opacity: 0;
+    font-family: $lato;
     transition: .5s ease;
-    &.active { animation: appear .4s ease .4s forwards; }
-    &.inactive { animation: disappear .4s ease forwards; }
+    &.active { animation: slideIn .8s ease .2s forwards; }
+    &.inactive { animation: slideOut .4s linear forwards; }
+}
 
-    @keyframes appear {
-        0% { transform: translateX(100%); opacity: 0; }
-        100% { transform: translateX(0); opacity: 1; }
+.form-header {
+    margin-bottom: 30px;
+}
+
+.form-header-text {
+    margin: 0;
+    & strong {
+        display: block;
+        padding-bottom: 8px;
+        font-size: rem(16px);
+        font-weight: bold;
+        color: $red;
     }
-    @keyframes disappear {
-        0% { transform: translateX(0); opacity: 1; }
-        100% { transform: translateX(-100%); opacity: 0; }
-    }
+}
+
+.form-toggle-link {
+    color: $red;
+    cursor: pointer;
 }
 
 .form-group {
     position: relative;
     width: 46%;
     margin: 0 auto 14px;
-    // &:nth-child(2) { margin-bottom: 0; }
 }
 
 .form-input {
@@ -169,20 +180,6 @@
     outline: none;
     cursor: pointer;
     transition: .1s;
-    // &:before {
-    //     position: absolute;
-    //     width: 100%; height: 100%;
-    //     top: -2px; left: -2px;
-    //     padding: 2px;
-    //     z-index: -1;
-    //     opacity: 0;
-    //     border-radius: 50%;
-    //     content: '';
-    //     background-color: $red;
-    //     pointer-events: none;
-    //     transition: transform 0.2s, opacity 0.2s, background-color .1s;
-    //     transform: scale(2);
-    // }
     &:before {
         position: absolute;
         width: 100%; height: 150%;
@@ -196,6 +193,15 @@
         pointer-events: none;
         transition: transform 0.2s, opacity 0.2s, background-color .1s;
     }
+    &:after { // <== load spinner
+        position: absolute;
+        top: 50%; left: 50%;
+        margin-top: -10px; margin-left: -10px;
+        visibility: hidden;
+        font-family: 'Material Icons';
+        font-size: rem(20px);
+        content: 'autorenew';
+    }
     &[disabled] {
         color: #afb1be;
         border-color: #afb1be;
@@ -206,10 +212,21 @@
             background-color: transparent;
         }
     }
-
     &:not([disabled]):hover {
         background-color: $red;
         color: #fff;
     }
     &:not([disabled]):active { box-shadow: 0 0 20px 1px $red; }
+
+    &.loading {
+        color: transparent;
+        background-color: $red;
+        &:after {
+            visibility: visible;
+            color: #fff;
+            animation: spin .6s linear infinite;
+        }
+        &:hover { color: transparent; }
+        &:active { box-shadow: none; }
+    }
 }

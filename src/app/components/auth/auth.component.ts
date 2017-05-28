@@ -9,9 +9,14 @@ import { FlashcardsService } from '../../services/flashcards.service';
 @Component({
     selector: 'app-auth',
     template: `
-        
-        <div [class.active]="authMode === 'sign in'" [class.inactive]="authMode !== 'sign in'" class="auth-form sign-in">
-            <p class="form-title">Sign In</p>
+        <div [class.active]="authMode === 'sign in'" [class.inactive]="authMode !== 'sign in'" class="auth-form">
+            <div class="form-header">
+                <p class="form-header-text"><strong>Sign In</strong></p>
+                <p class="form-header-text">
+                    Have no account? <a (click)="authMode='sign up'" class="form-toggle-link">Sign up!</a>
+                </p>
+            </div>
+
             <form #SignInForm="ngForm" (ngSubmit)="onSignIn(SignInForm)">
                 <div class="form-group">
                     <input #signInEmail="ngModel" ngModel email required id="sign-in-email" class="form-input" name="email" type="email"/>
@@ -27,13 +32,19 @@ import { FlashcardsService } from '../../services/flashcards.service';
                     <p class="auth-error-message">{{signInError}}</p>
                     <button (click)="signInError=null" class="auth-error-close"></button>
                 </div>
-                <button [disabled]="SignInForm.invalid" class="form-submit-btn" type="submit">Sign In</button>
+                <button [disabled]="SignInForm.invalid" [class.loading]="formIsSubmiting" class="form-submit-btn" type="submit">Sign In</button>
             </form>
-            <p>Have no account? <a (click)="authMode='sign up'">Sign up!</a></p>
+
         </div>
         
-        <div [class.active]="authMode === 'sign up'" [class.inactive]="authMode !== 'sign up'" class="auth-form sign-up">
-            <p class="form-title">Sign Up</p>
+        <div [class.active]="authMode === 'sign up'" [class.inactive]="authMode !== 'sign up'" class="auth-form">
+            <div class="form-header">
+                <p class="form-header-text"><strong>Sign Up</strong></p>
+                <p class="form-header-text">
+                    Already a user? <a (click)="authMode='sign in'" class="form-toggle-link">Sign in!</a>
+                </p>
+            </div>
+
             <form [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
                 <div class="form-group">
                     <input #signUpEmail formControlName="email" id="sign-up-email" class="form-input" type="email"/>
@@ -52,11 +63,10 @@ import { FlashcardsService } from '../../services/flashcards.service';
                 </div>
                 <div *ngIf="signUpError" class="auth-error">
                     <p class="auth-error-message">{{signUpError}}</p>
-                    <button class="auth-error-close"></button>
+                    <button (click)="signUpError=null" class="auth-error-close"></button>
                 </div>
-                <button [disabled]="signUpForm.invalid" class="form-submit-btn" type="submit">Sign Up</button>
+                <button [disabled]="signUpForm.invalid" [class.loading]="formIsSubmiting" class="form-submit-btn" type="submit">Sign Up</button>
             </form>
-            <p>Already a user? <a (click)="authMode='sign in'">Sign in!</a></p>
         </div>
     `,
     styleUrls: ['auth.component.scss']
@@ -66,6 +76,7 @@ export class AuthComponent implements OnInit {
     signUpError:string; // error message returned from firebase
     signInError:string; // error message returned from firebase
     authMode = 'sign up'; // determines which form should be displayed - sign in or sign up
+    formIsSubmiting:boolean = false;
 
     constructor(private firebaseService:FirebaseService, private flashcardsService:FlashcardsService, private router:Router) {}
 
@@ -78,19 +89,33 @@ export class AuthComponent implements OnInit {
     }
 
     onSignUp() {
+        if (this.formIsSubmiting) { return; } // prevent if form is already submitting
+
         const { email, password } = this.signUpForm.value;
+
+        this.formIsSubmiting = true;
         this.firebaseService.signUpUser(email, password)
             .then(() => this.flashcardsService.loadFlashcards())
             .then(() => this.router.navigate(['']))
-            .catch(err => this.signUpError = err.message);
+            .catch(err => {
+                this.signUpError = err.message;
+                this.formIsSubmiting = false;
+            });
     }
 
     onSignIn(signInForm:NgForm) {
+        if (this.formIsSubmiting) { return; } // prevent if form is already submitting
+
         const { email, password } = signInForm.value;
+
+        this.formIsSubmiting = true;
         this.firebaseService.signInUser(email, password)
             .then(() => this.flashcardsService.loadFlashcards())
             .then(() => this.router.navigate(['']))
-            .catch(err => this.signInError = err.message);
+            .catch(err => {
+                this.signInError = err.message;
+                this.formIsSubmiting = false;
+            });
     }
 
     /* custom Validator function for passwords checking */

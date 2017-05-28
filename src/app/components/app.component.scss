@@ -3,8 +3,9 @@
 
 :host {
     display: flex;
-    width: 700px; height: 700px;
-    margin: 4vh auto 0;
+    width: 700px; height: 90vh;
+    max-height: 700px; min-height: 600px;
+    margin: 5vh auto;
     border-radius: 15px;
     box-shadow: 0 0 60px 3px rgba(0, 0, 0, 0.4);
     overflow: hidden;
