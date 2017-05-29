@@ -13,12 +13,7 @@ export class FirebaseService {
 
     constructor(private router:Router) {
 
-        const config = {
-            apiKey: "AIzaSyCq4qVj6NMEyUSqdy00Jet8xZkd6V4wxRg",
-            authDomain: "ng-flashcards-ee871.firebaseapp.com",
-            databaseURL: "https://ng-flashcards-ee871.firebaseio.com",
-            projectId: "ng-flashcards-ee871"
-        };
+        // const config = { ... }; <=== FIREBASE CONFIG GOES HERE
 
         firebase.initializeApp(config);
 
