@@ -9,7 +9,7 @@ import { FlashcardsService } from '../../services/flashcards.service';
 @Component({
     selector: 'app-auth',
     template: `
-        <div [class.active]="authMode === 'sign in'" [class.inactive]="authMode !== 'sign in'" class="auth-form">
+        <div [ngClass]="{active: authMode === 'sign in', inactive: authMode !== 'sign in'}" class="auth-form">
             <div class="form-header">
                 <p class="form-header-text"><strong>Sign In</strong></p>
                 <p class="form-header-text">
@@ -37,7 +37,7 @@ import { FlashcardsService } from '../../services/flashcards.service';
 
         </div>
         
-        <div [class.active]="authMode === 'sign up'" [class.inactive]="authMode !== 'sign up'" class="auth-form">
+        <div [ngClass]="{active: authMode === 'sign up', inactive: authMode !== 'sign up'}" class="auth-form">
             <div class="form-header">
                 <p class="form-header-text"><strong>Sign Up</strong></p>
                 <p class="form-header-text">
@@ -120,25 +120,6 @@ export class AuthComponent implements OnInit {
 
     /* custom Validator function for passwords checking */
     passwordsMatch(control:FormControl): {[validationKey: string]: boolean} {
-        // return this.signUpForm.get('password').value !== control.value ? { passwordsNotMatch: true } : null;
         return control.value !== control.root.value['password'] ? { passwordsNotMatch: true } : null;
     }
 }
-
-
-// <div class="auth-form sign-up">
-//     <p class="form-title">Sign Up</p>
-//     <form #SignUpFrom="ngForm" (ngSubmit)="onSignUp(SignUpFrom)">
-//         <div class="form-group">
-//             <input #signUpEmail="ngModel" ngModel email required id="sign-up-email" class="form-input" name="email" type="email"/>
-//             <label [class.active]="!!signUpEmail.value" class="input-field-label email" for="sign-up-email">email</label>
-//             <small [class.active]="signUpEmail.invalid && signUpEmail.touched" class="input-error">valid email is required</small>
-//         </div>
-//         <div class="form-group">
-//             <input #signUpPwd="ngModel" ngModel required minlength="6" id="sign-up-pwd" class="form-input" name="password" type="password"/>
-//             <label [class.active]="!!signUpPwd.value" class="input-field-label password" for="sign-up-pwd">password</label>
-//             <small [class.active]="signUpPwd.invalid && signUpPwd.touched" class="input-error">6 characters password is required</small>
-//         </div>
-//         <button [disabled]="SignUpFrom.invalid" class="form-submit-btn" type="submit">Sign Up</button>
-//     </form>
-// </div>

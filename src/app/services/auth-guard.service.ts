@@ -27,23 +27,11 @@ export class AuthGuardService implements CanActivate {
                 return this.firebaseService.authStateChanged.map(userIsAuthenticated => {
                     if (userIsAuthenticated) {
                         console.log('AUTH_GUARD: authenticated - async');
-
-
-
-
-                        // console.log(this.flashcardsService.loadFLashcards());
                         this.flashcardsService.loadFlashcards().then(() => {
-                            console.log('AUTH_GUARD: data loaded!')
-                            console.log(state);
-                            // this.router.navigate(['']);
+                            console.log('AUTH_GUARD: data loaded')
                             this.router.navigate([state.url]);
                             return true;
                         });
-                        
-
-
-
-                        // return true;
                     } else {
                         console.log('AUTH_GUARD: not authenticated - async');
                         this.router.navigate(['/auth']);

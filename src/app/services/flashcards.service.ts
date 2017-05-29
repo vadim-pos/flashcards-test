@@ -9,11 +9,9 @@ import { FirebaseService } from './firebase.service';
 export class FlashcardsService {
     decks:Deck[] = [];
     decksUpdated:Subject<void> = new Subject<void>();
+    decksInitiallyLoaded:Subject<void> = new Subject<void>(); // fires after decks was loaded for first time
 
-    constructor(private firebaseService:FirebaseService) {
-        // this.decks = JSON.parse(localStorage.getItem('flashcards')) || exampleDecks;
-        // this.loadFLashcards();
-    }
+    constructor(private firebaseService:FirebaseService) {}
 
     loadFlashcards():firebase.Promise<any> {
         return this.firebaseService.loadFlashcards() // returns promise thenable object
@@ -21,12 +19,14 @@ export class FlashcardsService {
                 const loadedData = dataSnapshot.val();
                 if (loadedData) {
                     const loadedDecks = loadedData.decks;
-                /* firebase can't handle empty arrays, so if no cards specified in the deck - set it as [] */
+                /* firebase can't handle empty arrays, so if no cards specified in the deck - them as [] */
                     loadedDecks.forEach(deck => deck.cards ? null : deck.cards = []);
                     this.decks = loadedDecks;
+                    this.decksInitiallyLoaded.next();
                     this.decksUpdated.next();
                 } else {
                     this.decks = exampleDecks; // if no decks was loaded - set default decks
+                    this.decksInitiallyLoaded.next();
                     this.decksUpdated.next();
                 }
             })
@@ -34,7 +34,6 @@ export class FlashcardsService {
     }
 
     saveFlashcards() {
-        // localStorage.setItem('flashcards', JSON.stringify(this.decks));
         this.firebaseService.saveFlashcards(this.decks);
     }
 
@@ -63,7 +62,6 @@ export class FlashcardsService {
                 ? (now - card.studiedDate) / dayInMs >= card.studyExpirationDays
                 : true;
         });
-
     }
 
     addDeck(deckName:string) {
@@ -109,10 +107,10 @@ export class FlashcardsService {
 
 /* -------------------------------------------------------------------- */
 
-/* decks examples, setting as default */
+/* decks examples - default decks */
 const exampleDecks:Deck[] = [
     {
-        name: 'Chinease',
+        name: 'Chinease Example',
         id: 1052414683911,
         cards: [
             {front: 'Good afternoon', back: '下午好 - Xiàwǔ hǎo', id: 136032 },
@@ -121,7 +119,7 @@ const exampleDecks:Deck[] = [
         ]
     },
     {
-        name: 'Belarusian History',
+        name: 'History Example',
         id: 124567890123,
         cards: [
             {front: 'Foundation of Mogilev', back: '1267 - the first mention in the annals. Foundation of Mogilev Castle.', id: 100012 },
