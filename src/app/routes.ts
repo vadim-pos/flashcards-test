@@ -12,5 +12,6 @@ export const routes = [
     { path: 'deck/:deckId/edit/:cardId', component: CardEditComponent, canActivate: [AuthGuardService] },
     { path: 'deck/:deckId/study', component: CardStudyComponent, canActivate: [AuthGuardService] },
     { path: 'deck/:deckId/study/:cardId', component: CardStudyComponent, canActivate: [AuthGuardService] },
-    { path: 'auth', component: AuthComponent }
+    { path: 'auth', component: AuthComponent },
+    { path: '**', redirectTo: '' }
 ];

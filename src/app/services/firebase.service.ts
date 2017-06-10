@@ -12,7 +12,6 @@ export class FirebaseService {
     authStateChanged:Subject<boolean> = new Subject<boolean>();
 
     constructor(private router:Router) {
-
         // const config = { ... }; <=== FIREBASE CONFIG GOES HERE
 
         firebase.initializeApp(config);
