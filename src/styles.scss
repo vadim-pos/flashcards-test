@@ -1,8 +1,9 @@
 @import 'assets/mixins';
 @import 'assets/variables';
+@import 'assets/animations';
 @import 'assets/fonts';
 
-/* ----------- Main ----------- */
+/* ----------- Base ----------- */
 
 html, body {
     // height: 100%;
@@ -18,10 +19,16 @@ body {
 
 * { box-sizing: border-box; }
 
-/* preload text */
-.preload {
-    display: inline-block;
-    padding: 10px 10px;
-    font-size: 1.4rem;
-    color: #fff;
+/* ----------- Preloader ----------- */
+
+.preloader {
+    position: absolute;
+    height: 80px;
+    width: 80px;
+    top: 30%; left: 50%;
+    border-radius: 50%;
+    border-width: 4px;
+    border-style: solid;
+    border-color: #fff #fff #fff transparent;
+    animation: spin 1.4s infinite linear;
 }
