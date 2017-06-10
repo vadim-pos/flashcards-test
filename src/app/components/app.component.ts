@@ -9,7 +9,8 @@ import { FlashcardsService } from '../services/flashcards.service';
         <app-decks [class.active]="showDecks"></app-decks>
         <main class="main">
             <header class="app-header">
-                <button *ngIf="userIsAuthenticated && decksIsLoaded" (click)="showDecks = !showDecks" [class.active]="showDecks" class="decks-trigger" [title]="showDecks ? 'hide decks' : 'show decks'"></button>
+                <button *ngIf="userIsAuthenticated && decksIsLoaded" (click)="showDecks = !showDecks" [class.active]="showDecks" class="decks-trigger-btn" [title]="showDecks ? 'hide decks' : 'show decks'"></button>
+                <button *ngIf="userIsAuthenticated" (click)="logoutUser()" class="logout-btn" title="logout"></button>
                 <h1 class="app-title">
                     <a [routerLink]="['']" data-hover="Flashcards repetitor" class="app-title-link">Flashcards repetitor</a>
                 </h1>
@@ -40,5 +41,9 @@ export class AppComponent implements OnInit {
             this.decksIsLoaded = true;
             if (this.userIsAuthenticated) { this.showDecks = true; }
         });
+    }
+
+    logoutUser() {
+        this.firebaseService.logoutUser();
     }
 }

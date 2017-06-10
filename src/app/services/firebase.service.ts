@@ -41,6 +41,12 @@ export class FirebaseService {
             .then(user => this.userId = user.uid);
     }
 
+    logoutUser() {
+        firebase.auth().signOut()
+            .then(() => this.router.navigate(['/auth']))
+            .catch(err => console.log(err));
+    }
+
     saveFlashcards(data:any) {
         this.dbRef.child(`users/${this.userId}`).set({ decks: data })
             .then(res => console.log(res))
